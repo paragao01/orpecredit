@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="tituloNavegador" />Orpecredit</title>
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="topo.css" />
+	<h:outputStylesheet library="css" name="barraMenu.css" />
+	<h:outputScript name="locales.js" library="js"></h:outputScript>	
+	<style type="text/css">
+		.ui-widget-header {
+			background: #cc0000;
+		}
+	</style>	
+</h:head>
+<h:body>
+	<h:form>
+		<div class="titulo">
+			<p:outputLabel value="% DE COBERTURA DE  CARTÓRIOS DE PROTESTOS" />
+		</div>
+		<p:panelGrid id="ide" columns="1" styleClass="ui-noborder"
+			style="width: 100%;">
+			<p:outputLabel styleClass="descricao"
+				value="Cobertura é a porcentagem de cartórios de protestos participante do IEPTB em uma determinada região" />
+			<p:outputLabel styleClass="descricao"
+				value="As empresas possuem estabelecimentos (matriz e filiais) em diversos municípios." />
+			<p:outputLabel styleClass="descricao"
+				value="Elas só podem ser protestadas nos cartórios de protestos que cobrem esses municípios." />
+			<p:outputLabel styleClass="descricao"
+				value="A CrediOnLine sabe quantos desses cartórios prestam informações para o IEPTB (Instituto de Estudo de Protestos de Títulos do Brasil), portanto, se por exemplo nestes municípios há 10 cartórios, e destes 8 prestam informações para o IEPTB, a cobertura será de 80%." />
+			<p:outputLabel styleClass="descricao"
+				value="Veja a seguir as porcentagens de coberturas de alguns  estados:" />
+			<p:outputLabel styleClass="descricao" value="DF   100%" />
+			<p:outputLabel styleClass="descricao" value="SC   100%" />
+			<p:outputLabel styleClass="descricao" value="SP    97%" />
+			<p:outputLabel styleClass="descricao" value="RJ    95%" />
+			<p:outputLabel styleClass="descricao" value="MG    94%" />
+			<p:outputLabel styleClass="descricao" value="ES    71%" />
+		</p:panelGrid>
+		
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage library="imagens" name="ajaxloadingbar.gif" />
+		</p:dialog>			
+	</h:form>
+</h:body>
+</html>

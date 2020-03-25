@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="tituloNavegador" />Orpecredit -	Negativa&ccedil;&atilde;o Baixa</title>
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="topo.css" />
+	<h:outputStylesheet library="css" name="barraMenu.css" />
+	<h:outputScript name="locales.js" library="js"></h:outputScript>
+</h:head>
+<ui:composition template="/base/_template.xhtml">
+	<ui:define name="tituloNavegador">
+		Orpecredit
+	</ui:define>
+	<ui:define name="tituloPagina">
+		Negativa&ccedil;&atilde;o - Baixa
+	</ui:define>
+	<ui:define name="corpo">
+	
+		<h:form id="listarNegativacao">
+
+			<div style="margin: 0 auto; text-align:center; font-size: 110%; background-color: #EAEAEA">
+				<p:outputLabel value="Negativa&ccedil;&atilde;o - Relat&oocute;rio"/>
+			</div>
+			<br/>
+			<br/>
+			<br/>
+			<h:panelGroup id="pai" style="text-align: left">
+			<div style="margin: 0 auto; text-align:center">
+				<p:outputLabel value="Tipo Pessoa : " />
+				<p:selectOneMenu id="pessoa" label="pessoa" 
+					value="#{negativacaoController.pessoaListar}"
+					style="display: inline-block; vertical-align: middle; width:80px; !important;">
+					<f:selectItem itemValue="T"  itemLabel="Todos" />						
+					<f:selectItem itemValue="F" itemLabel="F&iacute;sica" />
+					<f:selectItem itemValue="J" itemLabel="Jur&iacute;dica" />
+					<p:ajax update="pai" event="change" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>	
+				
+				<p:outputLabel value="CPF: " rendered="#{negativacaoController.pessoaListar.equals('F')}"/>
+				<p:inputText id="cpf" label="CPF" value="#{negativacaoController.cpf}"
+					rendered="#{negativacaoController.pessoaListar.equals('F')}"
+					style="width:100px !important;" size="14" maxlength="14">
+				</p:inputText>
+				
+				<p:outputLabel value="CNPJ: " rendered="#{negativacaoController.pessoaListar.equals('J')}"/>
+				<p:inputText id="cnpj" label="CNPJ" value="#{negativacaoController.cnpj}"
+					rendered="#{negativacaoController.pessoaListar.equals('J')}"
+					style="width:100px !important;" size="18" maxlength="18">
+				</p:inputText>
+				
+				<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>	
+					
+				<p:outputLabel value="Status : " />
+				<p:selectOneMenu id="sta" label="Status" 
+					value="#{negativacaoController.status}"
+					style="display: inline-block; vertical-align: middle; width:80px; !important;">
+					<f:selectItem itemValue="T" itemLabel="Todos" />  						
+					<f:selectItem itemValue="B" itemLabel="Baixados" />  
+					<f:selectItem itemValue="A" itemLabel="Em aberto" />
+				</p:selectOneMenu>	
+					
+				<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>	
+							
+				<p:outputLabel value="Inclu&iacute;do em : "/>
+				<p:calendar id="dtaInicio" label="data Inicio" 
+						    value="#{negativacaoController.dataInicial}"
+							locale="pt_BR" pattern="dd/MM/yyyy" mask="true"
+							style="width:30px !important;">
+				</p:calendar>
+				
+				<p:outputLabel value="&nbsp;&nbsp;"/>
+				
+				<p:outputLabel value="Inclu&iacute;do at&eacute; : "/>
+				<p:calendar id="dtaFinal" label="data Final" 
+						    value="#{negativacaoController.dataFinal}" 
+							locale="pt_BR" pattern="dd/MM/yyyy" mask="true" 
+							style="width:30px !important;"> 
+				</p:calendar>
+				
+				<p:outputLabel><br/></p:outputLabel>
+				<p:outputLabel><br/></p:outputLabel>
+				<p:outputLabel><br/></p:outputLabel>
+				
+				<p:commandButton styleClass="no-print" icon="ui-icon-search" value="Pesquisar" 
+					update="listarNegativacao" actionListener="#{negativacaoController.negativacao('L')}" />
+					
+				<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>	
+								
+				<p:commandButton styleClass="no-print" value="Voltar" icon="ui-icon-arrowreturnthick-1-w" 
+				    action="#{negativacaoController.voltar}" immediate="true" />
+				    	
+				<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" rendered="#{not empty negativacaoController.lis.listagem}"/>	
+				    								
+				<p:commandButton styleClass="no-print" value="Imprimir" type="button"
+					rendered="#{not empty negativacaoController.lis.listagem}"  
+					ajax="false" onclick="window.print();" icon="ui-icon-print" /> 					
+			</div>
+			</h:panelGroup>
+			<p:outputLabel rendered="#{empty negativacaoController.lis.listagem}"><br/></p:outputLabel>
+			<p:outputLabel rendered="#{empty negativacaoController.lis.listagem}"><br/></p:outputLabel>					
+			<div style="clear: both;"></div>			
+			<br/>
+			<br/>
+			<p:dataTable widgetVar="dtlista" id="dtlista" paginator="true" rows="10"
+				value="#{negativacaoController.lis.listagem}" var="listar"
+				rendered="#{not empty negativacaoController.lis.listagem}"
+				style="width:990px; margin: 0 auto; -webkit-print-color-adjust: exact;">
+				<p:column headerText="Inclus&atilde;o" style="text-align:center" colspan="1">
+					<p:outputLabel value="#{listar.getDataInclusao()}" />
+				</p:column>	
+				<p:column headerText="Nome/Raz&atilde;o" style="text-align:left" colspan="2">
+					<p:outputLabel value="#{listar.getDadosDevedor().getNome()}" />
+				</p:column>
+				<p:column headerText="Documento" style="text-align:left" colspan="2">
+					<p:outputLabel value="#{listar.getDadosDocumento().getTipo().equals('CPF')?negativacaoController.formataCPF(listar.getDadosDocumento().getNumero()):negativacaoController.formataCNPJ(listar.getDadosDocumento().getNumero())}" />
+				</p:column>
+				<p:column headerText="Contrato" style="text-align:left" colspan="1">
+					<p:outputLabel value="#{listar.getDadosContrato().getContrato()}" />
+				</p:column>				
+				<p:column headerText="Valor" style="text-align:left" colspan="1">
+					<p:outputLabel value="#{listar.getDadosContrato().getValorParcela()}" />
+				</p:column>				
+				<p:column headerText="Status" style="text-align:left" colspan="1">
+					<p:outputLabel value="#{negativacaoController.formataStatus(listar.getDataBaixa())}" />
+				</p:column>				
+        		<p:column headerText="Op&ccedil;&atilde;o" 
+        		          style="text-align:left" colspan="2">
+             		<p:commandButton update="listarNegativacao:detalhe" 
+             			oncomplete="PF('detalheInclusao').show()" value="Detalhe" >
+                		<f:setPropertyActionListener value="#{listar}" target="#{negativacaoController.listaDoc}" />
+            		</p:commandButton>
+            		<p:outputLabel>&nbsp;</p:outputLabel>
+             		<p:commandButton update="listarNegativacao:baixar" rendered="#{listar.getDataBaixa().equals('null')}" 
+             			oncomplete="PF('detalheBaixar').show()" value="Baixar" >
+             			<f:setPropertyActionListener value="#{listar}" target="#{negativacaoController.listaDoc}" />
+            		</p:commandButton>            		
+ 				</p:column>
+			</p:dataTable>
+			<p:dialog widgetVar="detalheBaixar" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false" width="500" height="150"
+				header="Baixar Negativa&ccedil;&atilde;o">
+				<p:outputPanel id="baixar" styleClass="ui-noborder">
+					<h:panelGrid columns="2" styleClass="ui-noborder" style="width: 100%; text-align:left;">
+						<p:outputLabel><br/></p:outputLabel>
+						<p:outputLabel><br/></p:outputLabel>
+						<p:outputLabel value="CPF:" rendered="#{negativacaoController.listaDoc.getDadosDocumento().getTipo().equals('CPF')}"/>
+						<p:outputLabel value="#{negativacaoController.formataCPF(negativacaoController.listaDoc.getDadosDocumento().getNumero())}" 
+									   rendered="#{negativacaoController.listaDoc.getDadosDocumento().getTipo().equals('CPF')}"/>
+						<p:outputLabel value="CNPJ:" rendered="#{negativacaoController.listaDoc.getDadosDocumento().getTipo().equals('CNPJ')}"/>
+						<p:outputLabel value="#{negativacaoController.formataCNPJ(negativacaoController.listaDoc.getDadosDocumento().getNumero())}" 
+									   rendered="#{negativacaoController.listaDoc.getDadosDocumento().getTipo().equals('CNPJ')}"/>
+						<p:outputLabel><br/></p:outputLabel>
+						<p:outputLabel><br/></p:outputLabel>						
+						<p:outputLabel value="Motivo da Baixa : " />				
+						<p:selectOneMenu id="motivo" label="Motivo" required="true"
+							requiredMessage="Motivo não informado"
+							value="#{negativacaoController.motivo}"
+							style="display: inline-block; vertical-align: middle; width:350px; !important;">
+							<f:selectItem itemValue="01" itemLabel="Pagamento na Firma" />
+							<f:selectItem itemValue="04" itemLabel="Cancelamento por falta de pagamento" />
+							<f:selectItem itemValue="06" itemLabel="Solicita&ccddil;&atilde;o da Firma / Processo Especial" />
+							<f:selectItem itemValue="10" itemLabel="Erro de cadastramento da Firma" />
+							<f:selectItem itemValue="11" itemLabel="Baixado anteriormente pelo CDL-Rio" />
+							<f:selectItem itemValue="12" itemLabel="Morte do Devedor" />
+							<f:selectItem itemValue="13" itemLabel="Refinanciamento" />
+							<f:selectItem itemValue="16" itemLabel="A pedido da Firma" />
+							<f:selectItem itemValue="40" itemLabel="Pagamento em tr&acirc;nsito - Cr&eacute;dito ainda n&atilde;o repassado pelo Banco" />
+							<f:selectItem itemValue="41" itemLabel="Acordo / Decis&atilde;o Judicial" />
+							<f:selectItem itemValue="42" itemLabel="Baixa para regulariza&ccddil;&atilde;o interna da Empresa" />
+						</p:selectOneMenu>
+						<p:outputLabel><br/></p:outputLabel>
+						<p:outputLabel><br/></p:outputLabel>
+						<p:outputLabel><br/></p:outputLabel>
+						<p:outputLabel><br/></p:outputLabel>						
+						<p:outputLabel>&nbsp;</p:outputLabel>
+						<p:commandButton styleClass="no-print" value="Confirmar" style="text-align:center;"
+							update="listarNegativacao" actionListener="#{negativacaoController.negativacao('B')}" />
+						<p:outputLabel><br/></p:outputLabel>							
+					</h:panelGrid>
+					<input type="hidden" name="doc" value="#{negativacaoController.listaDoc.getDadosDocumento().getNumero()}" />
+					<input type="hidden" name="tipo" value="#{negativacaoController.listaDoc.getDadosDocumento().getTipo()}" />					
+					<input type="hidden" name="contr" value="#{negativacaoController.listaDoc.getDadosContrato().getContrato()}" />
+					<input type="hidden" name="dtAtr" value="#{negativacaoController.listaDoc.getDadosContrato().getDataAtTraso()}" />					
+					<input type="hidden" name="idneg" value="#{negativacaoController.listaDoc.getIdNegativacao()}" />
+				</p:outputPanel>
+			</p:dialog>
+			<p:dialog widgetVar="detalheInclusao" modal="true" showEffect="fade" hideEffect="fade" resizable="false" 
+    				  width="800" height="250" header="Dados da Negativa&ccedil;&atilde;o">
+				<p:outputPanel id="detalhe" styleClass="ui-noborder">
+					<p:outputLabel value="Dados do Devedor" style="font-weight: bold; font-size: 15px;" />	
+					<br />
+					<br />
+					<h:panelGrid columns="6" styleClass="ui-noborder" style="width: 100%;" rendered="#{negativacaoController.listaDoc.getDadosDocumento().getTipo().equals('CPF')}">
+						<p:outputLabel value="CPF:" />
+						<p:outputLabel value="#{negativacaoController.formataCPF(negativacaoController.listaDoc.getDadosDocumento().getNumero())}" />
+						<p:outputLabel value="Nome:" />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosDevedor().getNome()}" />	
+						<p:outputLabel value="Tipo Devedor: " />
+						<p:outputLabel value="#{negativacaoController.formataDevedor(negativacaoController.listaDoc.getDadosDevedor().getTipoDevedor())}" />
+						<!--<p:outputLabel value="Data Nascimento:" />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosDevedor().getDataNascimento()}" />-->						
+					</h:panelGrid>
+					<h:panelGrid columns="6" styleClass="ui-noborder" style="width: 100%;" rendered="#{negativacaoController.listaDoc.getDadosDocumento().getTipo().equals('CNPJ')}">
+						<p:outputLabel value="CNPJ:" />
+						<p:outputLabel value="#{negativacaoController.formataCNPJ(negativacaoController.listaDoc.getDadosDocumento().getNumero())}" />
+						<p:outputLabel value="Raz&atilde;o:" />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosDevedor().getNome()}" />
+						<p:outputLabel value="Tipo Devedor: " />
+						<p:outputLabel value="#{negativacaoController.formataDevedor(negativacaoController.listaDoc.getDadosDevedor().getTipoDevedor())}" />						
+						<!--<p:outputLabel value="Tipo Documento: " />
+						<p:outputLabel value="#{negativacaoController.formataTipoDoc(negativacaoController.listaDoc.getDadosDocumento().getTipo())}" />-->
+					</h:panelGrid>
+					<br />
+					<br />
+					<p:outputLabel value="Dados do Contrato"
+						style="font-weight: bold; font-size: 15px;" />
+					<br />
+					<br />
+					<h:panelGrid columns="8" styleClass="ui-noborder" style="width: 100%;">
+						<p:outputLabel>Contrato : &nbsp;</p:outputLabel>
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosContrato().getContrato()}" />
+						<p:outputLabel value="Natureza da Opera&ccedil;&atilde;o : " />
+						<p:outputLabel value="#{negativacaoController.formataNatureza(negativacaoController.listaDoc.getDadosContrato().getNaturezaOperacao())}" />
+						<p:outputLabel value="Data de Atraso:" />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosContrato().getDataAtTraso()}" />
+						<p:outputLabel value="Data de Inclus&atilde;o:" />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDataInclusao()}" />						
+						<p:outputLabel value="Valor da Parcela:" />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosContrato().getValorParcela()}" />
+						<p:outputLabel value="Qtde.Parcelas:" />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosContrato().getQuantidade()}" />
+						<p:outputLabel value="Data do Termino:" />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosContrato().getDataTermino()}" />
+						<p:outputLabel value="Data da Baixa:" />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDataBaixa().equals('null')?' - ':negativacaoController.listaDoc.getDataBaixa()}" />						
+					</h:panelGrid>
+					<br />
+					<br />
+					<p:outputLabel value="Dados do Endere&ccedil;o"	style="font-weight: bold; font-size: 15px;"
+						rendered="#{!negativacaoController.pessoa.equals('T')}" />
+					<br />
+					<br />
+					<h:panelGrid columns="6" styleClass="ui-noborder" style="width: 80%;">
+						<p:outputLabel value="Logradouro: " />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosEndereco().getLogradouro()}" />
+						<p:outputLabel value="Bairro: " />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosEndereco().getBairro()}" />
+						<p:outputLabel value="Munic&iacute;pio: " />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosEndereco().getMunicipio()}" />
+						<p:outputLabel value="Estado: " />
+						<p:outputLabel value="#{negativacaoController.formataEstado(negativacaoController.listaDoc.getDadosEndereco().getEstado())}" />
+						<p:outputLabel value="CEP: " />
+						<p:outputLabel value="#{negativacaoController.listaDoc.getDadosEndereco().getCep()}" />
+					</h:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+			<p:messages id="messages" autoUpdate="true" />			
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

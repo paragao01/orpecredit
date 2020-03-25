@@ -1,0 +1,1673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="tituloNavegador" />Orpecredit -	Consulta EMPRESARIAL GOLD</title>
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="topo.css" />
+	<h:outputStylesheet library="css" name="barraMenu.css" />
+	<h:outputScript name="locales.js" library="js" />
+	<style type="text/css">
+	.ui-widget-header {
+		background: #EAEAEA;
+		border: 0 none;
+		color: #104E8B;
+		-webkit-print-color-adjust: exact
+	}
+	.ui-datatable-subtable-header {
+		color: #104E8B; 
+		font-weight: bold;
+		background: #EAEAEA;
+		border: 0 none;
+		-webkit-print-color-adjust: exact
+	}
+	.alinhaVertical>tbody>tr>td {
+    	vertical-align: top;
+    	-webkit-print-color-adjust: exact
+	}
+	.ui-widget {
+		font-size: 110%;
+		-webkit-print-color-adjust: exact
+	}		
+	</style>
+</h:head>
+<h:body>
+	<h:form id="formConsulta" style="background-color: #ffffff;">
+		<br />	
+		<div id="noprint">
+			<p style="float: left;">&nbsp;</p> 
+			<p style="float: right;">
+			<p:commandButton value="Imprimir" type="button" 
+				ajax="false" onclick="window.print();" icon="ui-icon-print" />
+            </p>
+		</div>
+		<div style="clear: both;"></div>
+		<br />
+		<br />
+		<div id="logoOrpec">
+			<h:graphicImage style="float: left;"  library="imagens" name="logo_orpecredit.jpg" />
+			<h:graphicImage style="float: right;" library="imagens" name="orpec.png" />
+		</div>
+		<div style="clear: both;"></div>		
+		<br />
+		<hr />
+		<br />
+		<div>
+			<p style="float: left; font-size: 20px; margin: 5px;">Consulta EMPRESARIAL GOLD</p>
+			<p style="float: right;"> DATA :
+				<p:outputLabel value="#{consultaController.dataAtual}" />
+				&nbsp;&nbsp;
+			</p>
+		</div>
+		<div style="clear: both;"></div>
+		<div>
+			<p style="float: left; margin: 5px;">INFORMAÇÕES CONFIDENCIAIS</p>
+			<p style="float: right;"> HORA :
+				<p:outputLabel value="#{consultaController.horaAtual}" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</p>
+		</div>
+		<div style="clear: both;"></div>
+		<br />
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="DECISÃO" rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFDECISAO() and consultaController.valorTela1}" />
+		</div>
+		<p:panelGrid id="iddecisao" columns="1" styleClass="ui-noborder" style="width: 100%;" 
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFDECISAO() and consultaController.valorTela1}">
+			<p:outputLabel style="font-size: 12px; font-weight: bold; color: #004276; text-align: center;"  
+				value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFDECISAO().getDEFDESCRICAO()}" />
+			<br />
+			<p:outputLabel><hr /></p:outputLabel>
+			<p:outputLabel style="color: #000000;">
+			Esta análise foi baseada na validação de informações existentes na Boa Vista SCPC e é de inteira responsabilidade do usuário e da empresa a decisão de aprovar/reprovar a negociação. As informações são <br />
+			confidenciais e é proibida a sua reprodução total ou parcial, bem como qualquer forma de divulgação.
+			</p:outputLabel>
+		</p:panelGrid>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">		
+		<div class="titulo">
+			<p:outputLabel value="IDENTIFICAÇÃO" />
+		</div>
+		<p:panelGrid id="ideBasico" columns="3" styleClass="ui-noborder" style="width: 100%;" 
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO()}">
+			<p:outputLabel styleClass="descricao" value="CNPJ" />
+			<p:outputLabel styleClass="descricao" value="Razão" />
+			<p:outputLabel styleClass="descricao" value="Nome Fantasia" />
+			<p:outputLabel value="#{consultaController.formataCNPJ(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFCNPJ())}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFRAZAOSOCIAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFNOMEFANTASIA()}" />
+			<p:outputLabel styleClass="descricao" value="Situação do CNPJ" />
+			<p:outputLabel styleClass="descricao" value="Data da Situação" />
+			<p:outputLabel styleClass="descricao" value="Data da consulta na Receita Federal" />			
+			<p:outputLabel value="#{consultaController.condicao(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFSITUACAOCNPJ())}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFDATASITUACAOCNPJ()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFDATACONSULTARECEITAFEDERAL()}" />			
+			<p:outputLabel styleClass="descricao" value="UF-NIRE" />
+			<p:outputLabel styleClass="descricao" value="UF-Inscrição Estadual" />
+			<p:outputLabel styleClass="descricao" value="Data da Fundação" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFUFNIRE()}-#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFNUMERONIRE()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFUFINSCRICAOESTADUAL()} - #{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFINSCRICAOESTADUAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFDATAFUNDACAO()}" />						
+			<p:outputLabel styleClass="descricao" value="Natureza Jurídica" />
+			<p:outputLabel styleClass="descricao" value="Ramo de Atividade" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />			
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFCODIGONATUREZAJURIDICA()} / #{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFNATUREZAJURIDICA()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFRAMOATIVIDADE().getDEFATIVIDADE()} - #{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO().getDEFRAMOATIVIDADE().getDEFCNAE()}" />
+		</p:panelGrid>
+		<p:panelGrid id="ideCompleto" columns="3" styleClass="ui-noborder" style="width: 100%;" 
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO()}">
+			<p:outputLabel styleClass="descricao" value="CNPJ" />
+			<p:outputLabel styleClass="descricao" value="Razão" />
+			<p:outputLabel styleClass="descricao" value="Nome Fantasia" />
+			<p:outputLabel value="#{consultaController.formataCNPJ(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFCNPJ())}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFRAZAOSOCIAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFNOMEFANTASIA()}" />
+			<p:outputLabel styleClass="descricao" value="Situação do CNPJ" />
+			<p:outputLabel styleClass="descricao" value="Data da Situação" />
+			<p:outputLabel styleClass="descricao" value="Data da consulta na Receita Federal" />			
+			<p:outputLabel value="#{consultaController.condicao(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFSITUACAOCNPJ())}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFDATASITUACAOCNPJ()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFDATACONSULTARECEITAFEDERAL()}" />			
+			<p:outputLabel styleClass="descricao" value="UF-NIRE" />
+			<p:outputLabel styleClass="descricao" value="Razão Social Anterior" />
+			<p:outputLabel styleClass="descricao" value="Data alteração Razão Social" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFUFNIRE()}-#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFNUMERONIRE()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFRAZAOSOCIALANTERIOR()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFDATAALTERACAORAZAOSOCIAL()}" />													
+			<p:outputLabel styleClass="descricao" value="UF-Inscrição Estadual" />
+			<p:outputLabel styleClass="descricao" value="Data da Fundação" />
+			<p:outputLabel styleClass="descricao" value="Data de Encerramento" />			
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFUFINSCRICAOESTADUAL()} - #{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFINSCRICAOESTADUAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFDATAFUNDACAO()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFDATAENCERRAMENTO()}" />						
+			<p:outputLabel styleClass="descricao" value="Situação SINTEGRA" />
+			<p:outputLabel styleClass="descricao" value="Data Situação SINTEGRA" />
+			<p:outputLabel styleClass="descricao" value="Data Consulta no SINTEGRA" />			
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFSITUACAOSINTEGRA()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFDATASITUACAO()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFDATACONSULTASINTEGRA()}" />												
+			<p:outputLabel styleClass="descricao" value="Natureza Jurídica" />
+			<p:outputLabel styleClass="descricao" value="Segmento" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />			
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFCODIGONATUREZAJURIDICA()} / #{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFNATUREZAJURIDICA()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFSEGMENTO()}" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />			
+			<p:outputLabel styleClass="descricao" value="Capital Inicial" />
+			<p:outputLabel styleClass="descricao" value="Data Registro" />
+			<p:outputLabel styleClass="descricao" value="Órgão" />			
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFCAPITALINICIAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFDATAREGISTRO()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFORGAO()}" />												
+			<p:outputLabel styleClass="descricao" value="Capital Atual" />
+			<p:outputLabel styleClass="descricao" value="Data Alteração Capital" />
+			<p:outputLabel styleClass="descricao" value="Órgão Atual" />			
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFCAPITALATUAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFDATAALTERACAOCAPITAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFORGAOATUAL()}" />												
+			<p:outputLabel styleClass="descricao" value="Ramo de Atividade Primário - CNAE" />
+			<p:outputLabel styleClass="descricao" value="Ramos de Atividade Secundário - CNAE" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />			
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFRAMOATIVIDADEPRIMARIO().getDEFATIVIDADE()} - #{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFRAMOATIVIDADEPRIMARIO().getDEFCNAE()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFRAMOATIVIDADESECUNDARIO().getDEFATIVIDADE()} - #{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOCOMPLETO().getDEFRAMOATIVIDADESECUNDARIO().getDEFCNAE()}" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />	
+		</p:panelGrid>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFIDENTIFICACAOBASICO()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">		
+		<div class="titulo">
+			<p:outputLabel value="LOCALIZAÇÃO" />
+		</div>
+		<p:panelGrid id="loc1" columns="2" styleClass="ui-noborder" style="width: 100%;" 
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOBASICO()}">
+			<p:outputLabel styleClass="descricao" value="Endereço" />
+			<p:outputLabel styleClass="descricao" value="Complemento" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOBASICO().getDEFLOGRADOURO()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOBASICO().getDEFCOMPLEMENTO()}" />
+		</p:panelGrid>
+		<p:panelGrid id="loc2" columns="4" styleClass="ui-noborder" style="width: 100%;" 
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOBASICO()}">		
+			<p:outputLabel styleClass="descricao" value="Bairro" />
+			<p:outputLabel styleClass="descricao" value="Cep" />
+			<p:outputLabel styleClass="descricao" value="Cidade" />
+			<p:outputLabel styleClass="descricao" value="UF" />								
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOBASICO().getDEFBAIRRO()}" />
+			<p:outputLabel value="#{consultaController.formataCEP(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOBASICO().getDEFCEP())}" />			
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOBASICO().getDEFCIDADE()}" />			
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOBASICO().getDEFUF()}" />
+		</p:panelGrid>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOBASICO()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		
+		<p:outputLabel rendered="#{consultaController.valorTela2}">
+		<div class="divBorda">		
+		<div class="titulo">
+			<p:outputLabel value="CADASTRO NA ANVISA" rendered="#{consultaController.valorTela2}"/>
+		</div>
+		<p:outputLabel value="Distribuidor" style="color: red; font-size: 12px; font-weight: bold;" 
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES()}"/>
+		<p:panelGrid id="anvisa1" columns="3" styleClass="ui-noborder" style="width: 100%;"
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES()}">
+			<p:outputLabel styleClass="descricao" value="Responsável técnico 1" />
+			<p:outputLabel styleClass="descricao" value="Responsável técnico 2" />
+			<p:outputLabel styleClass="descricao" value="Responsável técnico 3" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFRESPTECNICO()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFRESPTECNICO()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFSEGUNDORESPTECNICO()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFSEGUNDORESPTECNICO()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFTERCEIRORESPTECNICO()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFTERCEIRORESPTECNICO()}" />
+			<p:outputLabel styleClass="descricao" value="Responsável legal 1" />
+			<p:outputLabel styleClass="descricao" value="Responsável legal 2" />
+			<p:outputLabel styleClass="descricao" value="Responsável legal 3" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFRESPLEGAL()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFRESPLEGAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFSEGUNDORESPLEGAL()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFSEGUNDORESPLEGAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFTERCEIRORESPLEGAL()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFTERCEIRORESPLEGAL()}" />								
+		</p:panelGrid>
+		<p:dataTable widgetVar="dtDistr" id="dtDistr" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES().getDEFAUTORIZACOES().getDEFAUTORIZACAO()}"
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFDISTRIBUIDORES()}"			
+			var="distribuicao" style="width:100%;">
+			<p:column headerText="Autorização" style="text-align:center">
+				<p:outputLabel value="#{distribuicao.getDEFAUTORIZACAO()}" />
+			</p:column>
+			<p:column headerText="Situação" style="text-align:center">
+				<p:outputLabel value="#{distribuicao.getDEFSITUACAO()}" />
+			</p:column>
+			<p:column headerText="Data autorização" style="text-align:center">
+				<p:outputLabel value="#{distribuicao.getDEFDATAAUTORIZACAO()}" />
+			</p:column>
+			<p:column headerText="Número do processo" style="text-align:center">
+				<p:outputLabel value="#{distribuicao.getDEFNUMPROCESSO()}" />
+			</p:column>
+			<p:column headerText="Tipo de autorização" style="text-align:center">
+				<p:outputLabel value="#{distribuicao.getDEFTIPOAUTORIZACAO()==null?'-':distribuicao.getDEFTIPOAUTORIZACAO()}" />
+			</p:column>
+			<p:column headerText="Classe de atividade" style="text-align:left" colspan="3">
+				<p:outputLabel value="#{distribuicao.getDEFCLASSEATIVIDADE()}" />
+			</p:column>
+		</p:dataTable>		
+		<p:outputLabel value="Petições" style="color: red; font-size: 12px; font-weight: bold;" 
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFPETICOES()}" />		
+		<p:dataTable widgetVar="dtPeticao" id="dtPeticao" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFPETICOES().getDEFPETICAO()}"
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFPETICOES()}"
+			var="peticao" style="width:100%;">
+			<p:column headerText="Data entrada" style="text-align:center">
+				<p:outputLabel value="#{peticao.getDEFDATAENTRADA()==null?'-':peticao.getDEFDATAENTRADA()}" />
+			</p:column>
+			<p:column headerText="Número Expediente" style="text-align:left" colspan="2">
+				<p:outputLabel value="#{peticao.getDEFNUMEXPEDIENTE()==null?'-':peticao.getDEFNUMEXPEDIENTE()}" />
+			</p:column>
+			<p:column headerText="Situação" style="text-align:left" colspan="3">
+				<p:outputLabel value="#{peticao.getDEFSITUACAO()==null?'-':peticao.getDEFSITUACAO()}" />
+			</p:column>
+			<p:column headerText="Protocolo" style="text-align:center">
+				<p:outputLabel value="#{peticao.getDEFPROTOCOLO()==null?'-':peticao.getDEFPROTOCOLO()}" />
+			</p:column>
+			<p:column headerText="Assunto" style="text-align:left" colspan="2">
+				<p:outputLabel value="#{peticao.getDEFASSUNTO()==null?'-':peticao.getDEFASSUNTO()}" />
+			</p:column>
+			<p:column headerText="Processo" style="text-align:center">
+				<p:outputLabel value="#{peticao.getDEFPROCESSO()==null?'-':peticao.getDEFPROCESSO()}" />
+			</p:column>
+			<p:column headerText="Local" style="text-align:center">
+				<p:outputLabel value="#{peticao.getDEFLOCAL()==null?'-':peticao.getDEFLOCAL()}" />
+			</p:column>
+			<p:column headerText="Publicação" style="text-align:center">
+				<p:outputLabel value="#{peticao.getDEFPUBLICACAO()==null?'-':peticao.getDEFPUBLICACAO()}" />
+			</p:column>
+			<p:column headerText="Resolução" style="text-align:center">
+				<p:outputLabel value="#{peticao.getDEFRESOLUCAO()==null?'-':peticao.getDEFRESOLUCAO()}" />
+			</p:column>
+		</p:dataTable>
+		<p:outputLabel value="Farmacias e Drogarias" style="color: red; font-size: 12px; font-weight: bold;" 
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA()}" />
+		<p:panelGrid id="anvisa2" columns="3" styleClass="ui-noborder" style="width: 100%;"
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA()}">
+			<p:outputLabel styleClass="descricao" value="Responsável técnico 1" />
+			<p:outputLabel styleClass="descricao" value="Responsável técnico 2" />
+			<p:outputLabel styleClass="descricao" value="Responsável técnico 3" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFRESPTECNICO()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFRESPTECNICO()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFSEGUNDORESPTECNICO()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFSEGUNDORESPTECNICO()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFTERCEIRORESPTECNICO()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFTERCEIRORESPTECNICO()}" />
+			<p:outputLabel styleClass="descricao" value="Responsável legal 1" />
+			<p:outputLabel styleClass="descricao" value="Responsável legal 2" />
+			<p:outputLabel styleClass="descricao" value="Responsável legal 3" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFRESPLEGAL()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFRESPLEGAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFSEGUNDORESPLEGAL()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFSEGUNDORESPLEGAL()}" />
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFTERCEIRORESPLEGAL()==null?'-':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFTERCEIRORESPLEGAL()}" />								
+		</p:panelGrid>
+		<p:dataTable widgetVar="dtFarDrog" id="dtFarDrog" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA().getDEFAUTORIZACOES().getDEFAUTORIZACAO()}"
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFFARMACIADROGARIA()}"
+			var="farmDrog" style="width:100%;">
+			<p:column headerText="Autorização" style="text-align:center">
+				<p:outputLabel value="#{farmDrog.getDEFAUTORIZACAO()}" />
+			</p:column>
+			<p:column headerText="Situação" style="text-align:center">
+				<p:outputLabel value="#{farmDrog.getDEFSITUACAO()}" />
+			</p:column>
+			<p:column headerText="Data autorização" style="text-align:center">
+				<p:outputLabel value="#{farmDrog.getDEFDATAAUTORIZACAO()}" />
+			</p:column>
+			<p:column headerText="Número do processo" style="text-align:center">
+				<p:outputLabel value="#{farmDrog.getDEFNUMPROCESSO()}" />
+			</p:column>
+			<p:column headerText="Tipo de autorização" style="text-align:center">
+				<p:outputLabel value="#{farmDrog.getDEFTIPOAUTORIZACAO()==null?'-':farmDrog.getDEFTIPOAUTORIZACAO()}" />
+			</p:column>
+			<p:column headerText="Classe de atividade" style="text-align:left" colspan="3">
+				<p:outputLabel value="#{farmDrog.getDEFCLASSEATIVIDADE()}" />
+			</p:column>
+		</p:dataTable>		
+		<div class="nada-consta">
+			<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFMENSAGEM()}" rendered="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFANVISA().getDEFMENSAGEM().indexOf('Informação não disponível')>=0 and consultaController.valorTela2}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		</p:outputLabel>
+		
+		<p:outputLabel rendered="#{consultaController.valorTela5}">
+		<div class="divBorda">		
+		<div class="titulo">
+			<p:outputLabel value="EMPRESA SITUADA NO MESMO ENDEREÇO" rendered="#{consultaController.valorTela5}"/>
+		</div>
+		<p:dataTable widgetVar="dtEmpEnd" id="dtEmpEnd" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFEMPRESASSITUADANOMESMOENDERECO().getDEFEMPRESASITUADANOMESMOENDERECO()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFEMPRESASSITUADANOMESMOENDERECO().getDEFEMPRESASITUADANOMESMOENDERECO()}"
+			var="emprEnd" style="width:100%; margin: 0 auto;">
+			<p:column headerText="CNPJ" style="text-align:left">
+				<p:outputLabel value="#{emprEnd.getDEFCNPJ()}" />
+			</p:column>
+			<p:column headerText="Razão Social" colspan="3" style="text-align:left" >
+				<p:outputLabel value="#{emprEnd.getDEFRAZAOSOCIAL()}" />
+			</p:column>
+			<p:column headerText="Nome Fantasia" colspan="2" style="text-align:left">
+				<p:outputLabel value="#{emprEnd.getDEFNOMEFANTASIA()==null?'-':emprEnd.getDEFNOMEFANTASIA()}" />
+			</p:column>
+			<p:column headerText="Endereço" colspan="3" style="text-align:left">
+				<p:outputLabel value="#{emprEnd.getDEFENDERECO()}" />
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFEMPRESASSITUADANOMESMOENDERECO() and consultaController.valorTela5}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		</p:outputLabel>
+		
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="RISCO EMPRESARIAL" />
+		</div>
+		<p:panelGrid id="riscoEmp" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSCORE().getDEFSCOREPJ()}">	
+			<p:row>  
+                <p:column><p:outputLabel styleClass="descricao" value="Score" /></p:column>
+                <p:column><p:outputLabel styleClass="descricao" value="Probabilidade de Inadimplencia" /></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+            </p:row>
+            <p:row>                
+                <p:column><p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSCORE().getDEFSCOREPJ().getDEFSCORE()}" /></p:column>
+                <p:column><p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSCORE().getDEFSCOREPJ().getDEFPROBABILIDADE()}&nbsp;%" /></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+            </p:row>
+            <p:row><p:column colspan="4"><p:outputLabel>&nbsp;</p:outputLabel></p:column></p:row>                       
+			<p:row> 
+                <p:column colspan="4"><p:outputLabel styleClass="descricao" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSCORE().getDEFSCOREPJ().getDEFTEXTO()}" /></p:column>			            
+			</p:row>										             
+		</p:panelGrid>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSCORE().getDEFSCOREPJ()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+
+		<p:outputLabel rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFFATURAMENTOPRESUMIDO() and consultaController.valorTela4}">
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="FATURAMENTO PRESUMIDO" rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFFATURAMENTOPRESUMIDO() and consultaController.valorTela4}" />
+		</div>
+		<p:panelGrid id="fatPre" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFFATURAMENTOPRESUMIDO()}">	
+			<p:row>  
+                <p:column><p:outputLabel styleClass="descricao" value="Faixa" /></p:column>
+                <p:column><p:outputLabel styleClass="descricao" value="Faturamento Anual (Em Reais)" /></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+            </p:row>
+            <p:row>
+                <p:column><p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFFATURAMENTOPRESUMIDO().getDEFFAIXA()}" /></p:column>               
+                <p:column><p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFFATURAMENTOPRESUMIDO().getDEFFATURAMENTOANUAL()}" /></p:column> 
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+            </p:row> 
+            <p:row><p:column colspan="4"><p:outputLabel>&nbsp;</p:outputLabel></p:column></p:row>                          
+			<p:row> 
+                <p:column colspan="4"><p:outputLabel styleClass="descricao" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFFATURAMENTOPRESUMIDO().getDEFMENSAGEM()}" /></p:column>			            
+			</p:row>											             
+		</p:panelGrid>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFFATURAMENTOPRESUMIDO() and consultaController.valorTela4}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		</p:outputLabel>
+		
+		<p:outputLabel rendered="#{consultaController.valorTela7}">
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="LIMITE DE CRÉDITO" rendered="#{consultaController.valorTela7}"/>
+		</div>
+		<p:panelGrid id="limCred" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLIMITECREDITO()}">	
+			<p:row>  
+                <p:column><p:outputLabel styleClass="descricao" value="Valor (R$)" /></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>                
+            </p:row>
+            <p:row>
+                <p:column>
+                	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLIMITECREDITO().getDEFSCORE()==null?'-':consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLIMITECREDITO().getDEFSCORE())}">
+                		<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                	</p:outputLabel>
+                </p:column>               
+                <p:column><p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLIMITECREDITO().getDEFTEXTO()}" /></p:column> 
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+				<p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+				<p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>				
+            </p:row> 
+            <p:row><p:column colspan="7"><p:outputLabel>&nbsp;</p:outputLabel></p:column></p:row>                          
+			<p:row> 
+                <p:column colspan="7">
+                	<p:outputLabel styleClass="descricao" value="IMPORTANTE : " />
+                	<p:outputLabel value="a definição do valor do limite de crédito efetivamente concedido é de total responsabilidade da empresa cedente e deve estar alinhado a sua política interna de concessão de crédito." />
+               	</p:column>	                				            
+			</p:row>											             
+		</p:panelGrid>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFLIMITECREDITO() and consultaController.valorTela7}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		</p:outputLabel>
+		
+		<p:outputLabel rendered="#{consultaController.valorTela0 or consultaController.valorTela3}">
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="SÓCIOS E ACIONISTAS" rendered="#{consultaController.valorTela0 or consultaController.valorTela3}"/>
+		</div>
+		<div class="subTitulo1">
+			<p:outputLabel style="text-align: left;"  value="Se constar&nbsp;&nbsp;" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSOCIOS().getDEFSOCIO()}"/>
+			<h:graphicImage library="imagens" name="bolinha.png" style="text-align: left;" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSOCIOS().getDEFSOCIO()}"/>
+			<p:outputLabel style="text-align: left;" value="&nbsp;&nbsp;Existem informações negativas disponíveis para consulta!" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSOCIOS().getDEFSOCIO()}"/>
+		</div>							
+		<p:dataTable id="dtsocAcionista" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSOCIOS().getDEFSOCIO()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSOCIOS().getDEFSOCIO()}"
+			var="socios" style="width:100%; margin: 0 auto;">
+        	<p:column headerText="" style="text-align:left">
+             	<p:commandButton update="formConsulta:detalheSocio" oncomplete="PF('restricaoSocio').show()" 
+             		icon="ui-icon-search" title="View" rendered="#{not empty socios.getDEFRESTRICOESDOCUMENTO()}">
+                	<f:setPropertyActionListener value="#{socios}" target="#{consultaController.defSocio}" />
+            	</p:commandButton>
+            	<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" rendered="#{not empty socios.getDEFRESTRICOESDOCUMENTO()}"/>
+            	<h:graphicImage library="imagens" name="bolinha.png" rendered="#{socios.getDEFINDICADORDEBITO().equals('Sim')}"/>
+			</p:column>			
+        	<p:column headerText="Nome da empresa" colspan="3" style="text-align:left">
+				<p:outputLabel value="#{socios.getDEFNOMEEMPRESA()}" />
+			</p:column>
+			<p:column headerText="CPF/CNPJ" style="text-align:left" colspan="2">
+				<p:outputLabel value="#{socios.getDEFTIPODOCUMENTO().equals('1')?consultaController.formataCPF(socios.getDEFCPFCNPJ()):consultaController.formataCNPJ(socios.getDEFCPFCNPJ())}" />
+			</p:column>
+			<p:column headerText="Situação Documento" style="text-align:center">
+				<p:outputLabel value="#{socios.getDEFSITUACAODOCUMENTO()}" />
+			</p:column>
+			<p:column headerText="Participação(%)" style="text-align:center">
+				<p:outputLabel value="#{consultaController.strDouble(socios.getDEFPARTICIPACAO())}" />
+			</p:column>
+			<p:column headerText="Data de Entrada" style="text-align:center">
+				<p:outputLabel value="#{socios.getDEFDATAENTRADA()==null?'-':socios.getDEFDATAENTRADA()}" />
+			</p:column>
+			<p:column headerText="Assina pela empresa" style="text-align:center">
+				<p:outputLabel value="#{socios.getDEFASSINAEMPRESA().equals('N')?'Não':'Sim'}" />
+			</p:column>
+		</p:dataTable>
+    	<p:dialog widgetVar="restricaoSocio" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            	<p:panelGrid id="detalheSocio" styleClass="ui-noborder" rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSOCIOS().getDEFSOCIO()}">
+    				<f:facet name="header">
+         				<p:row>
+            				<p:column colspan="11" style="text-align: left;"><p:outputLabel value="#{consultaController.defSocio.getDEFNOMEEMPRESA()}" /></p:column>
+        				</p:row>  
+        				<p:row>
+            				<p:column colspan="11" style="text-align: left;"><p:outputLabel value="&nbsp;" /></p:column>
+        				</p:row>    				        				  				   				    				
+        				<p:row>
+            				<p:column colspan="5" style="text-align: left;"><p:outputLabel value="Anotações Negativas" /></p:column>
+            				<p:column colspan="5" style="text-align: left;"><p:outputLabel value="Anotações Comportamentais" /></p:column>            				
+        				</p:row>
+        				<p:row>
+           					<p:column colspan="2" style="text-align: left;"><p:outputLabel value="Ocorrência" /></p:column>
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Quantidade" /></p:column>
+            				<p:column colspan="1"><p:outputLabel value="Última" /></p:column>            				
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Valor total (R$)" /></p:column>
+           					<p:column colspan="2" style="text-align: left;"><p:outputLabel value="Ocorrência" /></p:column>
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Quantidade" /></p:column>
+            				<p:column colspan="1"><p:outputLabel value="Última" /></p:column>            				
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Valor total (R$)" /></p:column>							   
+        				</p:row>    				        				
+    				</f:facet>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Pendências e Restrições" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Consultas" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFQUANTIDADE()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Cheques sem Fundo" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Títulos a Vencer" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFQUANTIDADE()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Protestos" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Pagamentos" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFQUANTIDADE()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                 	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Ações Judiciais" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="5"><p:outputLabel value="&nbsp;" /></p:column>
+                	</p:row>
+                 	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Recuperações e Falências Empresariais" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="5"><p:outputLabel value="&nbsp;" /></p:column>
+                	</p:row>               	
+                </p:panelGrid>                	
+    	</p:dialog>		
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFSOCIOS().getDEFSOCIO() and (consultaController.valorTela0 or consultaController.valorTela3)}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		</p:outputLabel>
+		
+		<p:outputLabel rendered="#{consultaController.valorTela0 or consultaController.valorTela3}">
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="ADMINISTRADORES" rendered="#{consultaController.valorTela0 or consultaController.valorTela3}"/>
+		</div>
+		<div class="subTitulo1">
+			<p:outputLabel style="text-align: left;"  value="Se constar&nbsp;&nbsp;" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFADMINISTRADORES().getDEFADMINISTRADOR()}"/>
+			<h:graphicImage library="imagens" name="bolinha.png" style="text-align: left;" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFADMINISTRADORES().getDEFADMINISTRADOR()}"/>
+			<p:outputLabel style="text-align: left;" value="&nbsp;&nbsp;Existem informações negativas disponíveis para consulta!" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFADMINISTRADORES().getDEFADMINISTRADOR()}"/>
+		</div>									
+		<p:dataTable widgetVar="dtadmin" id="dtadmin" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFADMINISTRADORES().getDEFADMINISTRADOR()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFADMINISTRADORES().getDEFADMINISTRADOR()}"
+			var="admin" style="width:100%; margin: 0 auto;">
+        	<p:column headerText="" style="text-align:left">
+             	<p:commandButton update="formConsulta:detalheAdmin" oncomplete="PF('restricaoAdmin').show()"
+             		icon="ui-icon-search" title="View" rendered="#{not empty admin.getDEFRESTRICOESDOCUMENTO()}">
+                	<f:setPropertyActionListener value="#{admin}" target="#{consultaController.defAdmin}" />
+            	</p:commandButton>
+            	<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" rendered="#{not empty admin.getDEFRESTRICOESDOCUMENTO()}"/>
+            	<h:graphicImage library="imagens" name="bolinha.png" rendered="#{admin.getDEFINDICADORDEBITO().equals('Sim')}"/>
+			</p:column>						
+ 			<p:column headerText="Nome" colspan="3" style="text-align:left">
+				<p:outputLabel value="#{admin.getDEFNOME()}" />
+			</p:column>
+			<p:column headerText="CPF" style="text-align:left" colspan="2">
+				<p:outputLabel value="#{consultaController.formataCPF(admin.getDEFCPF())}" />
+			</p:column>
+			<p:column headerText="Entrada" style="text-align:center">
+				<p:outputLabel value="#{admin.getDEFENTRADA()}" />
+			</p:column>
+			<p:column headerText="Mandato" style="text-align:left">
+				<p:outputLabel value="#{admin.getDEFMANDATO()}"/>
+			</p:column>
+			<p:column headerText="Cargo" style="text-align:left">
+				<p:outputLabel value="#{admin.getDEFCARGO()}"/>
+			</p:column>			
+			<p:column headerText="Situação do CPF" style="text-align:center">
+				<p:outputLabel value="#{admin.getDEFSITUACAOCPF()}"/>
+			</p:column>					
+		</p:dataTable>
+    	<p:dialog widgetVar="restricaoAdmin" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            	<p:panelGrid id="detalheAdmin" styleClass="ui-noborder" rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFADMINISTRADORES().getDEFADMINISTRADOR()}">
+    				<f:facet name="header">
+         				<p:row>
+            				<p:column colspan="11" style="text-align: left;"><p:outputLabel value="#{consultaController.defAdmin.getDEFNOME()}" /></p:column>
+        				</p:row>  
+        				<p:row>
+            				<p:column colspan="11" style="text-align: left;"><p:outputLabel value="&nbsp;" /></p:column>
+        				</p:row>    				        				  				   				
+        				<p:row>
+            				<p:column colspan="5" style="text-align: left;"><p:outputLabel value="Anotações Negativas" /></p:column>
+            				<p:column colspan="5" style="text-align: left;"><p:outputLabel value="Anotações Comportamentais" /></p:column>            				
+        				</p:row>
+        				<p:row>
+           					<p:column colspan="2" style="text-align: left;"><p:outputLabel value="Ocorrência" /></p:column>
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Quantidade" /></p:column>
+            				<p:column colspan="1"><p:outputLabel value="Última" /></p:column>            				
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Valor total (R$)" /></p:column>
+           					<p:column colspan="2" style="text-align: left;"><p:outputLabel value="Ocorrência" /></p:column>
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Quantidade" /></p:column>
+            				<p:column colspan="1"><p:outputLabel value="Última" /></p:column>            				
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Valor total (R$)" /></p:column>							   
+        				</p:row>    				        				
+    				</f:facet>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Pendências e Restrições" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Consultas" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFQUANTIDADE()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Cheques sem Fundo" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Títulos a Vencer" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFQUANTIDADE()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Protestos" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Pagamentos" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFQUANTIDADE()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                 	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Ações Judiciais" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="5"><p:outputLabel value="&nbsp;" /></p:column>
+                	</p:row>
+                 	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Recuperações e Falências Empresariais" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFULTIMA()==null?'-':consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocio.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="5"><p:outputLabel value="&nbsp;" /></p:column>
+                	</p:row>               	
+                </p:panelGrid>                	
+    	</p:dialog>				
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFADMINISTRADORES().getDEFADMINISTRADOR() and (consultaController.valorTela0 or consultaController.valorTela3)}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		</p:outputLabel>
+
+		<p:outputLabel rendered="#{consultaController.valorTela6 or consultaController.valorTela9}">
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="PARTICIPAÇÕES EM OUTRAS EMPRESAS" rendered="#{consultaController.valorTela6 or consultaController.valorTela9}"/>
+		</div>
+		<div class="subTitulo1">
+			<p:outputLabel style="text-align: left;"  value="Se constar&nbsp;&nbsp;" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESEMPRESASCONSULTADAS().getDEFPARTICIPACAOEMPRESACONSULTADA()}"/>
+			<h:graphicImage library="imagens" name="bolinha.png" style="text-align: left;" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESEMPRESASCONSULTADAS().getDEFPARTICIPACAOEMPRESACONSULTADA()}"/>
+			<p:outputLabel style="text-align: left;" value="&nbsp;&nbsp;Existem informações negativas disponíveis para consulta!" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESEMPRESASCONSULTADAS().getDEFPARTICIPACAOEMPRESACONSULTADA()}"/>
+		</div>		
+		<p:dataTable widgetVar="dtpartEmp" id="dtpartEmp" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESEMPRESASCONSULTADAS().getDEFPARTICIPACAOEMPRESACONSULTADA()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESEMPRESASCONSULTADAS().getDEFPARTICIPACAOEMPRESACONSULTADA()}"
+			var="partEmp" style="width:100%; margin: 0 auto;">
+        	<p:column headerText="" style="text-align:left">
+             	<p:commandButton update="formConsulta:detalheParEmp" oncomplete="PF('restricaoParEmp').show()" 
+             		icon="ui-icon-search" title="View" rendered="#{not empty partEmp.getDEFRESTRICOESDOCUMENTO()}">
+                	<f:setPropertyActionListener value="#{partEmp}" target="#{consultaController.defParEmp}" />
+            	</p:commandButton>
+            	<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" rendered="#{not empty partEmp.getDEFRESTRICOESDOCUMENTO()}"/>
+            	<h:graphicImage library="imagens" name="bolinha.png" rendered="#{partEmp.getDEFINDICADORDEBITO().equals('Sim')}"/>
+			</p:column>									
+			<p:column headerText="Razão Social Participada" colspan="3" style="text-align:left">
+				<p:outputLabel value="#{partEmp.getDEFRAZAOSOCIALPARTICIPADA()}" />
+			</p:column>
+			<p:column headerText="CNPJ Participada" style="text-align:left" colspan="2">
+				<p:outputLabel value="#{consultaController.formataCNPJ(partEmp.getDEFCNPJPARTICIPADA())}" />
+			</p:column>
+			<p:column headerText="Situação CNPJ" style="text-align:center">
+				<p:outputLabel value="#{partEmp.getDEFSITUACAOCNPJ()}" />
+			</p:column>
+			<p:column headerText="Participação(%)" style="text-align:right">
+				<p:outputLabel value="#{consultaController.strDouble(partEmp.getDEFPARTICIPACAO())}"/>
+			</p:column>
+			<p:column headerText="Entrada" style="text-align:center">
+				<p:outputLabel value="#{partEmp.getDEFENTRADA()}"/>
+			</p:column>			
+		</p:dataTable>
+    	<p:dialog widgetVar="restricaoParEmp" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            	<p:panelGrid id="detalheParEmp" styleClass="ui-noborder" rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESEMPRESASCONSULTADAS().getDEFPARTICIPACAOEMPRESACONSULTADA()}">
+    				<f:facet name="header">
+        				<p:row>
+            				<p:column colspan="11" style="text-align: left;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRAZAOSOCIALPARTICIPADA()}" /></p:column>
+        				</p:row>  
+        				<p:row>
+            				<p:column colspan="11" style="text-align: left;"><p:outputLabel value="&nbsp;" /></p:column>
+        				</p:row>    				        				  				
+        				<p:row>
+            				<p:column colspan="5" style="text-align: left;"><p:outputLabel value="Anotações Negativas" /></p:column>
+            				<p:column colspan="5" style="text-align: left;"><p:outputLabel value="Anotações Comportamentais" /></p:column>            				
+        				</p:row>
+        				<p:row>
+           					<p:column colspan="2" style="text-align: left;"><p:outputLabel value="Ocorrência" /></p:column>
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Quantidade" /></p:column>
+            				<p:column colspan="1"><p:outputLabel value="Última" /></p:column>            				
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Valor total (R$)" /></p:column>
+           					<p:column colspan="2" style="text-align: left;"><p:outputLabel value="Ocorrência" /></p:column>
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Quantidade" /></p:column>
+            				<p:column colspan="1"><p:outputLabel value="Última" /></p:column>            				
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Valor total (R$)" /></p:column>							   
+        				</p:row>    				        				
+    				</f:facet>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Pendências e Restrições" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFQUANTIDADE().equals('0')?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFULTIMA()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Consultas" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFQUANTIDADE()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFULTIMA()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Cheques sem Fundo" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFQUANTIDADE().equals('0')?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFULTIMA()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Títulos a Vencer" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFQUANTIDADE()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFULTIMA()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Protestos" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFQUANTIDADE().equals('0')?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFULTIMA()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Pagamentos" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFQUANTIDADE()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFULTIMA()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                 	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Ações Judiciais" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFQUANTIDADE().equals('0')?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFULTIMA()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="5"><p:outputLabel value="&nbsp;" /></p:column>
+                	</p:row>
+                 	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Recuperações e Falências Empresariais" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFQUANTIDADE().equals('0')?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFULTIMA()==null?'-':consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defParEmp.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="5"><p:outputLabel value="&nbsp;" /></p:column>
+                	</p:row>               	
+                </p:panelGrid>                	
+    	</p:dialog>						
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESEMPRESASCONSULTADAS().getDEFPARTICIPACAOEMPRESACONSULTADA() and (consultaController.valorTela6 or consultaController.valorTela9)}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		</p:outputLabel>
+		
+		<p:outputLabel rendered="#{((consultaController.valorTela0 and consultaController.valorTela6) or (consultaController.valorTela3 and consultaController.valorTela9) or (consultaController.valorTela0 and consultaController.valorTela9) or (consultaController.valorTela3 and consultaController.valorTela6))}">
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="PARTICIPAÇÕES DOS SÓCIOS E ADMINISTRADORES EM OUTRAS EMPRESAS" 
+			rendered="#{((consultaController.valorTela0 and consultaController.valorTela6) or (consultaController.valorTela3 and consultaController.valorTela9) or (consultaController.valorTela0 and consultaController.valorTela9) or (consultaController.valorTela3 and consultaController.valorTela6))}"/>
+		</div>
+		<div class="subTitulo1">
+			<p:outputLabel style="text-align: left;"  value="Se constar&nbsp;&nbsp;" 
+			rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESSOCIOSADMOUTRASEMPRESAS().getDEFSOCIO() and ((consultaController.valorTela0 and consultaController.valorTela6) or (consultaController.valorTela3 and consultaController.valorTela9) or (consultaController.valorTela0 and consultaController.valorTela9) or (consultaController.valorTela3 and consultaController.valorTela6))}"/>
+			<h:graphicImage library="imagens" name="bolinha.png" style="text-align: left;" 
+			rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESSOCIOSADMOUTRASEMPRESAS().getDEFSOCIO() and ((consultaController.valorTela0 and consultaController.valorTela6) or (consultaController.valorTela3 and consultaController.valorTela9) or (consultaController.valorTela0 and consultaController.valorTela9) or (consultaController.valorTela3 and consultaController.valorTela6))}"/>
+			<p:outputLabel style="text-align: left;" value="&nbsp;&nbsp;Existem informações negativas disponíveis para consulta!" 
+			rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESSOCIOSADMOUTRASEMPRESAS().getDEFSOCIO() and ((consultaController.valorTela0 and consultaController.valorTela6) or (consultaController.valorTela3 and consultaController.valorTela9) or (consultaController.valorTela0 and consultaController.valorTela9) or (consultaController.valorTela3 and consultaController.valorTela6))}"/>
+		</div>		
+		<p:dataTable widgetVar="dtSocioAdm" id="dtSocioAdm" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESSOCIOSADMOUTRASEMPRESAS().getDEFSOCIO()}" rowStyleClass="linha"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESSOCIOSADMOUTRASEMPRESAS().getDEFSOCIO() and ((consultaController.valorTela0 and consultaController.valorTela6) or (consultaController.valorTela3 and consultaController.valorTela9) or (consultaController.valorTela0 and consultaController.valorTela9) or (consultaController.valorTela3 and consultaController.valorTela6))}"
+			var="socioAdm" style="width:100%; -webkit-print-color-adjust: exact" frozenColumns="6">
+				<p:columnGroup type="header">
+					<p:row>
+						<p:column colspan="1" headerText="&nbsp;" style="text-align:left" />				
+						<p:column colspan="1" headerText="Razão Social" style="text-align:left" />
+						<p:column colspan="1" headerText="CNPJ" style="text-align:left" />
+						<p:column colspan="1" headerText="Situação" style="text-align:center" />
+						<p:column colspan="1" headerText="Participação(%)" style="text-align:right" />
+						<p:column colspan="1" headerText="Entrada" style="text-align:center" />						
+					</p:row>
+				</p:columnGroup>
+				<p:subTable var="particip" value="#{socioAdm.getDEFSOCIOSPARTICIPANTES()}" >
+					<f:facet name="header">
+						<p:outputLabel value="CPF : #{consultaController.formataCPF(socioAdm.getDEFCPFCNPJ())}" />
+						<p:outputLabel value="&nbsp;&nbsp;&nbsp;Nome do Sócio : #{socioAdm.getDEFNOMESOCIO()}" />
+					</f:facet>
+        			<p:column style="text-align:left">
+             			<p:commandButton update="formConsulta:detalheSocioAdmin" oncomplete="PF('restricaoSocioAdmin').show()" 
+             				icon="ui-icon-search" title="View" rendered="#{not empty particip.getDEFRESTRICOESDOCUMENTO()}">
+                			<f:setPropertyActionListener value="#{particip}" target="#{consultaController.defSocioAdmin}" />
+            			</p:commandButton>
+            			<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" rendered="#{not empty particip.getDEFRESTRICOESDOCUMENTO()}"/>
+            			<p:graphicImage library="imagens" name="bolinha.png" rendered="#{particip.getDEFINDICADORDEBITO().equals('Sim')}"/>
+					</p:column>									
+					<p:column style="text-align:left" >
+						<p:outputLabel value="#{particip.getDEFRAZAOSOCIAL()}" />
+					</p:column>
+					<p:column style="text-align:left">
+						<p:outputLabel value="#{consultaController.formataCNPJ(particip.getDEFCNPJ())}" />
+					</p:column>					
+					<p:column style="text-align:center">
+						<p:outputLabel value="#{particip.getDEFSITUACAOCNPJ()}" />
+					</p:column>	
+					<p:column style="text-align:right">
+						<p:outputLabel value="#{consultaController.strDouble(particip.getDEFPARTICIPACAO())}%" />
+					</p:column>	
+					<p:column style="text-align:center">
+						<p:outputLabel value="#{particip.getDEFENTRADA()}" />
+					</p:column>						
+				</p:subTable>
+		</p:dataTable>
+    	<p:dialog widgetVar="restricaoSocioAdmin" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            	<p:panelGrid id="detalheSocioAdmin" styleClass="ui-noborder" rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESSOCIOSADMOUTRASEMPRESAS().getDEFSOCIO()}">
+    				<f:facet name="header">
+        				<p:row>
+            				<p:column colspan="11" style="text-align: left;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRAZAOSOCIAL()}" /></p:column>
+        				</p:row>  
+        				<p:row>
+            				<p:column colspan="11" style="text-align: left;"><p:outputLabel value="&nbsp;" /></p:column>
+        				</p:row>    				        				  				
+        				<p:row>
+            				<p:column colspan="5" style="text-align: left;"><p:outputLabel value="Anotações Negativas" /></p:column>
+            				<p:column colspan="5" style="text-align: left;"><p:outputLabel value="Anotações Comportamentais" /></p:column>            				
+        				</p:row>
+        				<p:row>
+           					<p:column colspan="2" style="text-align: left;"><p:outputLabel value="Ocorrência" /></p:column>
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Quantidade" /></p:column>
+            				<p:column colspan="1"><p:outputLabel value="Última" /></p:column>            				
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Valor total (R$)" /></p:column>
+           					<p:column colspan="2" style="text-align: left;"><p:outputLabel value="Ocorrência" /></p:column>
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Quantidade" /></p:column>
+            				<p:column colspan="1"><p:outputLabel value="Última" /></p:column>            				
+            				<p:column colspan="1" style="text-align: right;"><p:outputLabel value="Valor total (R$)" /></p:column>							   
+        				</p:row>    				        				
+    				</f:facet>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Pendências e Restrições" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFULTIMA()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPENDENCIASRESTRICOES().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Consultas" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFQUANTIDADE()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFULTIMA()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCONSULTAS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Cheques sem Fundo" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFULTIMA()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFCHEQUESSEMFUNDO().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Títulos a Vencer" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFQUANTIDADE()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFULTIMA()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFTITULOSVENCER().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Protestos" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFULTIMA()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPROTESTOS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="2"><p:outputLabel value="Pagamentos" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFQUANTIDADE()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFULTIMA()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFPAGAMENTOS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>                		
+                	</p:row>
+                 	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Ações Judiciais" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFULTIMA()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFACOESJUDICIAIS().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="5"><p:outputLabel value="&nbsp;" /></p:column>
+                	</p:row>
+                 	<p:row>
+                		<p:column colspan="2"><p:outputLabel value="Recuperações e Falências Empresariais" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFQUANTIDADE().equals('0')?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFQUANTIDADE()}" /></p:column>
+                		<p:column colspan="1"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFULTIMA()==null?'-':consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFULTIMA()}" /></p:column>
+                		<p:column colspan="1" style="text-align: right;"><p:outputLabel value="#{consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFVALOR().equals('0')?'-':consultaController.strDouble(consultaController.defSocioAdmin.getDEFRESTRICOESDOCUMENTO().getDEFFALENCIASRECUPERACAOJUDICIAL().getDEFVALOR())}">
+                			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                		</p:outputLabel></p:column>
+                		<p:column colspan="5"><p:outputLabel value="&nbsp;" /></p:column>
+                	</p:row>               	
+                </p:panelGrid>                	
+    	</p:dialog>						
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPARTICIPACOESSOCIOSADMOUTRASEMPRESAS().getDEFSOCIO() and ((consultaController.valorTela0 and consultaController.valorTela6) or (consultaController.valorTela3 and consultaController.valorTela9) or (consultaController.valorTela0 and consultaController.valorTela9) or (consultaController.valorTela3 and consultaController.valorTela6))}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		</p:outputLabel>
+		
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="CONSULTAS" />
+		</div>
+		<br />		
+		<p:panelGrid id="consulta" style="width: 100%;" 
+		          rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCONSULTAS().getDEFCONSULTASMES()}">
+			<p:outputLabel styleClass="descricao" value="Quantidade Total :&nbsp;" />
+           	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCONSULTAS().getDEFQUANTIDADETOTAL()}" />
+           	<p:outputLabel styleClass="descricao" value="&nbsp;|&nbsp;" />
+			<p:outputLabel styleClass="descricao" value="Período :&nbsp;" />
+           	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCONSULTAS().getDEFPERIODOINICIAL()}" />
+            <p:outputLabel styleClass="descricao" value="&nbsp;até&nbsp;" />
+           	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCONSULTAS().getDEFPERIODOFINAL()}" />          	
+		</p:panelGrid>
+		<br />
+		<p:dataTable widgetVar="dtConMes" id="dtConMes" value="#{consultaController.listaConsultaMes}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCONSULTAS().getDEFCONSULTASMES()}"
+			var="consMes" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Ano" style="text-align:center">
+				<p:outputLabel value="#{consMes.getAno()}" />
+			</p:column>			
+			<p:column headerText="Janeiro" style="text-align:center">
+				<p:outputLabel value="#{consMes.getJan()}" />
+			</p:column>	
+			<p:column headerText="Fevereiro" style="text-align:center">
+				<p:outputLabel value="#{consMes.getFev()}" />
+			</p:column>	
+			<p:column headerText="Março" style="text-align:center">
+				<p:outputLabel value="#{consMes.getMar()}" />
+			</p:column>	
+			<p:column headerText="Abril" style="text-align:center">
+				<p:outputLabel value="#{consMes.getAbr()}" />
+			</p:column>									
+			<p:column headerText="Maio" style="text-align:center">
+				<p:outputLabel value="#{consMes.getMai()}" />
+			</p:column>	
+			<p:column headerText="Junho" style="text-align:center">
+				<p:outputLabel value="#{consMes.getJun()}" />
+			</p:column>	
+			<p:column headerText="Julho" style="text-align:center">
+				<p:outputLabel value="#{consMes.getJul()}" />
+			</p:column>	
+			<p:column headerText="Agosto" style="text-align:center">
+				<p:outputLabel value="#{consMes.getAgo()}" />
+			</p:column>	
+			<p:column headerText="Setembro" style="text-align:center">
+				<p:outputLabel value="#{consMes.getSet()}" />
+			</p:column>	
+			<p:column headerText="Outubro" style="text-align:center">
+				<p:outputLabel value="#{consMes.getOut()}" />
+			</p:column>	
+			<p:column headerText="Novembro" style="text-align:center">
+				<p:outputLabel value="#{consMes.getNov()}" />
+			</p:column>	
+			<p:column headerText="Dezembro" style="text-align:center">
+				<p:outputLabel value="#{consMes.getDez()}" />
+			</p:column>	
+		</p:dataTable>
+		<div class="subTitulo">
+			<p:outputLabel value="Últimas Ocorrências" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCONSULTAS().getDEFULTIMASCONSULTAS()}"/>
+		</div>	
+		<p:dataTable widgetVar="dtUltOcor" id="dtUltOcor" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCONSULTAS().getDEFULTIMASCONSULTAS().get(0).getDEFCONSULTA()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCONSULTAS().getDEFULTIMASCONSULTAS()}"
+			var="ultOcorr" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Data" style="text-align:left">
+				<p:outputLabel value="#{ultOcorr.getDEFDATA()}" />
+			</p:column>			
+			<p:column headerText="Empresa" colspan="5" style="text-align:left">
+				<p:outputLabel value="#{ultOcorr.getDEFRAZAOSOCIAL()}" />
+			</p:column>	
+			<p:column headerText="CNPJ" style="text-align:left" colspan="2">
+				<p:outputLabel value="#{consultaController.formataCNPJ(ultOcorr.getDEFCNPJ())}" />
+			</p:column>	
+		</p:dataTable>		
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCONSULTAS().getDEFCONSULTASMES()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		<!--
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="COMPORTAMENTO DE PAGAMENTOS" />
+		</div>
+		<p:dataTable widgetVar="dtCompPag" id="dtCompPag" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCOMPORTAMENTOPAGAMENTOS().getDEFITEM()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCOMPORTAMENTOPAGAMENTOS().getDEFITEM()}"
+			var="compPag" style="width:100%; margin: 0 auto;">
+			<p:columnGroup type="header">
+				<p:row>
+					<p:column headerText="Total" rowspan="2" />
+					<p:column headerText="Fornecedores" rowspan="2" />
+					<p:column headerText="Títulos" rowspan="2" />
+					<p:column headerText="Valor Total(R$)" rowspan="2" />
+					<p:column headerText="À Vista (%)" rowspan="2" />
+					<p:column headerText="Pontual (%)" rowspan="2" />
+					<p:column headerText="Dias de Atraso (%)" colspan="4" />
+					<p:column headerText="Atraso Médio (dias)" rowspan="2" />
+				</p:row>
+				<p:row>
+					<p:column headerText="6 a 15"  />
+					<p:column headerText="16 a 30" />
+					<p:column headerText="31 a 60" />
+					<p:column headerText="+ de 60" />
+				</p:row>
+			</p:columnGroup>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFTOTAL()==null?'-':compPag.getDEFTOTAL()}" />
+			</p:column>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFFORNECEDORES()==null?'-':compPag.getDEFFORNECEDORES()}" />				
+			</p:column>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFTITULOS()==null?'-':compPag.getDEFTITULOS()}" />				
+			</p:column>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFVALORTOTAL()==null?'-':compPag.getDEFVALORTOTAL()}" />
+			</p:column>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFAVISTA()==null?'-':compPag.getDEFAVISTA()}" />
+			</p:column>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFPONTUAL()==null?'-':compPag.getDEFPONTUAL()}" />
+			</p:column>
+			<p:column style="text-align:center">
+				<p:outputLabel value="#{compPag.getDEFDIASATRASO1()==null?'-':compPag.getDEFDIASATRASO1()}" />
+			</p:column>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFDIASATRASO2()==null?'-':compPag.getDEFDIASATRASO2()}" />
+			</p:column>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFDIASATRASO3()==null?'-':compPag.getDEFDIASATRASO3()}" />
+			</p:column>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFDIASATRASO4()==null?'-':compPag.getDEFDIASATRASO4()}" />
+			</p:column>
+			<p:column style="text-align:center" >
+				<p:outputLabel value="#{compPag.getDEFATRASOMEDIO()==null?'-':compPag.getDEFATRASOMEDIO()}" />
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCOMPORTAMENTOPAGAMENTOS().getDEFITEM()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="REFERENCIAIS DE NEGÓCIOS" />
+		</div>
+		<br />		
+		<p:panelGrid id="refNeg" styleClass="ui-noborder" style="width: 100%;" 
+		          rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFULTIMACOMPRA()}">
+    		<f:facet name="header">
+		        <p:row>
+        		    <p:column colspan="3" style="text-align:left">&nbsp;</p:column>
+            		<p:column colspan="2" style="text-align:left">Data</p:column>
+            		<p:column colspan="2" style="text-align:right">Valor (R$)</p:column>
+            		<p:column colspan="2" style="text-align:right">Média (R$)</p:column>
+        		</p:row>
+			</f:facet>
+		    <p:row>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left" >Última Compra</p:column>
+            	<p:column colspan="2" style="text-align:left">
+            		<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFULTIMACOMPRA().getDEFDATA()}" />
+            	</p:column>
+            	<p:column colspan="2" style="text-align:right">
+            		<p:outputLabel value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFULTIMACOMPRA().getDEFVALOR())}">
+            			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+            		</p:outputLabel>
+            	</p:column>
+            	<p:column colspan="2" style="text-align:right">
+            		<p:outputLabel value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFULTIMACOMPRA().getDEFMEDIA())}">
+            			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+            		</p:outputLabel>
+            	</p:column>            	
+        	</p:row>
+		    <p:row>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left">Maior Fatura</p:column>
+            	<p:column colspan="2" style="text-align:left">
+            		<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFMAIORFATURA().getDEFDATA()}" />
+            	</p:column>
+            	<p:column colspan="2" style="text-align:right">
+            		<p:outputLabel value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFMAIORFATURA().getDEFVALOR())}">
+            			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+            		</p:outputLabel>
+            	</p:column>
+            	<p:column colspan="2" style="text-align:right">
+            		<p:outputLabel value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFMAIORFATURA().getDEFMEDIA())}">
+            			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+            		</p:outputLabel>
+            	</p:column>            	
+        	</p:row>
+		    <p:row>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left">Maior Crédito</p:column>
+            	<p:column colspan="2" style="text-align:left">
+            		<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFMAIORCREDITO().getDEFDATA()}" />
+            	</p:column>
+            	<p:column colspan="2" style="text-align:right">
+            		<p:outputLabel value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFMAIORCREDITO().getDEFVALOR())}">
+            			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+            		</p:outputLabel>
+            	</p:column>
+            	<p:column colspan="2" style="text-align:right">
+            		<p:outputLabel value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFMAIORCREDITO().getDEFMEDIA())}">
+            			<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+            		</p:outputLabel>
+            	</p:column>            	
+        	</p:row>
+		</p:panelGrid>	
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFREFERENCIAISNEGOCIOS().getDEFULTIMACOMPRA()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="TEMPO DE RELACIONAMENTO COM FORNECEDORES" />
+		</div>
+		<br />		
+		<p:panelGrid id="tempoRel" styleClass="ui-noborder" style="width: 100%;" 
+		          rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDFONTESCONSULTADAS()}">
+		    <p:row>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left" >Fontes consultadas :&bsp;
+        	    <p:outputLabel style="font-weight: normal;  color:#282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDFONTESCONSULTADAS()==null?'0':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDFONTESCONSULTADAS()}" />
+        	    </p:column>
+        	</p:row>
+		    <p:row>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left">Até 6 meses :&mbsp; 
+         	    	<p:outputLabel style="font-weight: normal; color:#282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDATE6MESES()==null?'0':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDATE6MESES()}" />       	    
+        	    </p:column>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left">De 7 até 12 meses :&mbsp; 
+         	    	<p:outputLabel style="font-weight: normal; color:#282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDDE7A12MESES()==null?'0':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDDE7A12MESES()}" />       	    
+        	    </p:column>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left">De 1 até 2 anos :&mbsp; 
+         	    	<p:outputLabel style="font-weight: normal; color:#282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDDE1A2ANOS()==null?'0':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDDE1A2ANOS()}" />       	    
+        	    </p:column>        	    
+        	</p:row>
+		    <p:row>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left">De 3 até 5 anos :&mbsp; 
+         	    	<p:outputLabel style="font-weight: normal; color:#282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDDE3A5ANOS()==null?'0':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDDE3A5ANOS()}" />       	    
+        	    </p:column>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left">De 6 até 10 anos :&mbsp; 
+         	    	<p:outputLabel style="font-weight: normal; color:#282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDDE6A10ANOS()==null?'0':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDDE6A10ANOS()}" />       	    
+        	    </p:column>
+        	    <p:column colspan="3" style="color: #104E8B; font-weight: bold; text-align:left">Mais de 10 anos :&mbsp; 
+         	    	<p:outputLabel style="font-weight: normal; color:#282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDMAISDE10ANOS()==null?'0':consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDMAISDE10ANOS()}" />       	    
+        	    </p:column>        	    
+        	</p:row>
+		</p:panelGrid>	
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFTEMPORELACIONAMENTOFORNECEDORES().getDEFQTDFONTESCONSULTADAS()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		-->
+		<p:outputLabel rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFENDERECOTELEFONESAGENCIABANCARIA().getDEFENDERECOTELEFONEAGENCIA() and consultaController.valorTela8}">
+		<div class="divBorda">	
+		<div class="titulo">
+			<p:outputLabel value="ENDEREÇOS E TELEFONES DA AGÊNCIA BANCÁRIA" rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFENDERECOTELEFONESAGENCIABANCARIA().getDEFENDERECOTELEFONEAGENCIA() and consultaController.valorTela8}"/>
+		</div>
+		<p:dataGrid widgetVar="dtDadosAgen" id="dtDadosAgen" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFENDERECOTELEFONESAGENCIABANCARIA().getDEFENDERECOTELEFONEAGENCIA()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFENDERECOTELEFONESAGENCIABANCARIA().getDEFENDERECOTELEFONEAGENCIA() and consultaController.valorTela8}"
+		    paginator="true" paginatorPosition="bottom" rows="5" 
+			var="dadosAgenia" style="width:100%; margin: 0 auto;">
+			<p:panelGrid columns="4"  id="agencias" styleClass="ui-noborder" style="width: 100%;">
+				<p:outputLabel styleClass="descricao" value="Banco" />
+				<p:outputLabel styleClass="descricao" value="Nome Banco" />
+				<p:outputLabel styleClass="descricao" value="Telefone 1" />
+				<p:outputLabel styleClass="descricao" value="Telefone 2" />
+				<p:outputLabel value="#{dadosAgenia.getDEFBANCO()==null?'-':dadosAgenia.getDEFBANCO()}" />
+				<p:outputLabel value="#{dadosAgenia.getDEFNOMEBANCO()==null?'-':dadosAgenia.getDEFNOMEBANCO()}" />
+				<p:outputLabel value="#{dadosAgenia.getDEFTELEFONE1()==null?'-':dadosAgenia.getDEFTELEFONE1()}" />
+				<p:outputLabel value="#{dadosAgenia.getDEFTELEFONE2()==null?'-':dadosAgenia.getDEFTELEFONE2()}" />
+				<p:outputLabel styleClass="descricao" value="Endereço" />
+				<p:outputLabel styleClass="descricao" value="Praça" />
+				<p:outputLabel styleClass="descricao" value="&nbsp;" />
+				<p:outputLabel styleClass="descricao" value="&nbsp;" />
+				<p:outputLabel value="#{dadosAgenia.getDEFENDERECO()==null?'-':dadosAgenia.getDEFENDERECO()}" />
+				<p:outputLabel value="#{dadosAgenia.getDEFPRACA()==null?'-':dadosAgenia.getDEFPRACA()}" />
+				<p:outputLabel value="&nbsp;" />
+				<p:outputLabel value="&nbsp;" />
+				<p:outputLabel styleClass="descricao" value="Bairro" />
+				<p:outputLabel styleClass="descricao" value="Cidade" />
+				<p:outputLabel styleClass="descricao" value="UF" />
+				<p:outputLabel styleClass="descricao" value="CEP" />
+				<p:outputLabel value="#{dadosAgenia.getDEFBAIRRO()==null?'-':dadosAgenia.getDEFBAIRRO()}" />
+				<p:outputLabel value="#{dadosAgenia.getDEFCIDADE()==null?'-':dadosAgenia.getDEFCIDADE()}" />
+				<p:outputLabel value="#{dadosAgenia.getDEFUF()==null?'-':dadosAgenia.getDEFUF()}" />
+				<p:outputLabel value="#{dadosAgenia.getDEFCEP()==null?'-':dadosAgenia.getDEFCEP()}" />				
+			</p:panelGrid>
+		</p:dataGrid>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFENDERECOTELEFONESAGENCIABANCARIA().getDEFENDERECOTELEFONEAGENCIA() and consultaController.valorTela8}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+		</p:outputLabel>
+		
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="PENDÊNCIAS E RESTRIÇÕES FINANCEIRAS" />
+		</div>
+		<br />	
+		<p:panelGrid columns="7"  id="pedFin" styleClass="ui-noborder" style="width: 100%;"
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFULTIMASOCORRENCIAS().getDEFPENDENCIARESTRICAO()}">
+			<p:outputLabel styleClass="descricao" value="Informações do cliente" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />			
+			<p:outputLabel styleClass="descricao" value="Data" />
+			<p:outputLabel styleClass="descricao" value="Valor(R$)" />
+			<p:outputLabel styleClass="descricao" value="Total de Pendências: " />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFTOTALPENDENCIAS()}" />
+			<p:outputLabel styleClass="descricao" value="Total de Credores: " />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFTOTALCREDORES()}" />
+			<p:outputLabel styleClass="descricao" value="Primeiro:" />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFDATAPRIMEIRO()}" />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFVALORPRIMEIRO())}">
+				<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+			</p:outputLabel>
+			<p:outputLabel styleClass="descricao" value="Valor(R$): " />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFVALOR())}">
+				<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+			</p:outputLabel>
+			<p:outputLabel styleClass="descricao" value="Período: " />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFPERIODOINICIAL()} - #{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFPERIODOFINAL()}" />
+			<p:outputLabel styleClass="descricao" value="Maior:" />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFDATAMAIOR()}" />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFVALORMAIOR())}">
+				<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+			</p:outputLabel>
+		</p:panelGrid>	
+		<div class="subTitulo">
+			<p:outputLabel value="Últimas Ocorrências" rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFULTIMASOCORRENCIAS().getDEFPENDENCIARESTRICAO()}"/>
+		</div>	
+		<p:dataTable widgetVar="dtPendFin" id="dtPendFin" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFULTIMASOCORRENCIAS().getDEFPENDENCIARESTRICAO()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFULTIMASOCORRENCIAS().getDEFPENDENCIARESTRICAO()}"
+			var="pendFin" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Informante" colspan="3" style="text-align:left">
+				<p:outputLabel value="#{pendFin.getDEFINFORMANTE()}" />
+			</p:column>			
+			<p:column headerText="Tipo" style="text-align:center">
+				<p:outputLabel value="#{pendFin.getDEFTIPO()}" />
+			</p:column>
+			<p:column headerText="N&uacute;mero Contrato" colspan="2" style="text-align:left">
+				<p:outputLabel value="#{pendFin.getDEFDOCUMENTOORIGEM()}" />
+			</p:column>				
+			<p:column headerText="Data do débito" style="text-align:center">
+				<p:outputLabel value="#{pendFin.getDEFDATADEBITO()}" />
+			</p:column>	
+			<p:column headerText="Disponível em" style="text-align:center">
+				<p:outputLabel value="#{pendFin.getDEFDISPONIVELEM()}" />
+			</p:column>	
+			<p:column headerText="Valor(R$)" style="text-align:right">
+				<p:outputLabel value="#{consultaController.strDouble(pendFin.getDEFVALOR())}">
+					<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+				</p:outputLabel>
+			</p:column>				
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFULTIMASOCORRENCIAS().getDEFPENDENCIARESTRICAO()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="CHEQUE SEM FUNDO" />
+		</div>
+		<p:panelGrid id="chqSemFundo" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSEMFUNDO().getDEFTOTALCHEQUESSEMFUNDOS()}">
+			<p:row>  
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Total de Cheques :" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSEMFUNDO().getDEFTOTALCHEQUESSEMFUNDOS()}" />
+                </p:column>
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Total de Nomes Relacionados :" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSEMFUNDO().getDEFTOTALNOMESRELACIONADOS()}" />
+                </p:column>                
+			</p:row>
+		</p:panelGrid>
+		<div class="subTitulo">
+			<p:outputLabel value="Últimas Ocorrências" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSEMFUNDO().getDEFTOTALCHEQUESSEMFUNDOS()}"/>
+		</div>					
+		<p:dataTable widgetVar="dtSemFundo" id="dtSemFundo" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSEMFUNDO().getDEFULTIMASOCORRENCIAS().getDEFCHEQUESEMFUNDO()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSEMFUNDO().getDEFULTIMASOCORRENCIAS().getDEFCHEQUESEMFUNDO()}"
+			var="semFundo" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Qtde." style="text-align:center">
+				<p:outputLabel value="#{semFundo.getDEFQUANTIDADE()}" /> 
+			</p:column>
+			<p:column headerText="Data Último" style="text-align:center">
+				<p:outputLabel value="#{semFundo.getDEFDATAULTIMO()}" /> 
+			</p:column>				
+			<p:column headerText="Banco" style="text-align:center">
+				<p:outputLabel value="#{semFundo.getDEFNUMEROBANCO()}" />
+			</p:column>			
+			<p:column headerText="Agência" style="text-align:center">
+				<p:outputLabel value="#{semFundo.getDEFAGENCIA()}" />
+			</p:column>			
+			<p:column headerText="Motivo" colspan="2" style="text-align:center">
+				<p:outputLabel value="#{semFundo.getDEFMOTIVO()}" />
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSEMFUNDO().getDEFTOTALCHEQUESSEMFUNDOS()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="CHEQUES SUSTADOS MOTIVO 21" />
+		</div>
+		<p:panelGrid id="motivo21" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSUSTADOS().getDEFTOTAL()}">
+			<p:row>
+				<p:column colspan="4" style="text-align: left;">
+					<p:outputLabel styleClass="descricao" value="Atenção, esta informação não é desabonadora ao cliente" />
+				</p:column>
+			</p:row>
+			<p:row>  
+                <p:column colspan="2" style="text-align: left;">
+                	<p:outputLabel styleClass="descricao" value="Quantidade Total :" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSUSTADOS().getDEFTOTAL()}" />
+                </p:column>
+                <p:column colspan="2" style="text-align: left;">
+                	<p:outputLabel styleClass="descricao" value="Período: " />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSUSTADOS().getDEFPERIODOINICIAL()}" />
+                	&nbsp;à&nbsp;
+                	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSUSTADOS().getDEFPERIODOFINAL()}" />                	
+                </p:column>                
+			</p:row>
+		</p:panelGrid>
+		<div class="subTitulo">
+			<p:outputLabel value="Últimas Ocorrências" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSUSTADOS().getDEFTOTAL()}"/>
+		</div>			
+		<p:dataTable widgetVar="dtMotivo21" id="dtMotivo21" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSUSTADOS().getDEFULTIMASOCORRENCIAS().getDEFCHEQUESSUSTADO()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSUSTADOS().getDEFULTIMASOCORRENCIAS().getDEFCHEQUESSUSTADO()}"
+			var="motivo" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Data" style="text-align:center">
+				<p:outputLabel value="#{motivo.getDEFDATA()}" /> 
+			</p:column>
+			<p:column headerText="Banco" style="text-align:center">
+				<p:outputLabel value="#{motivo.getDEFBANCO()}" />
+			</p:column>
+			<p:column headerText="Agência" style="text-align:center">
+				<p:outputLabel value="#{motivo.getDEFAGENCIA()}" />
+			</p:column>
+			<p:column headerText="Cheques" colspan="2" style="text-align:center">
+				<p:outputLabel value="#{motivo.getDEFCHEQUES()}" />
+			</p:column>
+			<p:column headerText="Data Ocorrência" style="text-align:center">
+				<p:outputLabel value="#{motivo.getDEFDATADAOCORRENCIA()}" /> 
+			</p:column>							
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESSUSTADOS().getDEFTOTAL()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="DEVOLUÇÕES INFORMADAS PELO USUÁRIO" />
+		</div>
+		<p:panelGrid id="propUsu" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESDEVOLVIDOSINFORMADOSUSUARIO().getDEFQUANTIDADETOTAL()}">
+			<p:row>
+				<p:column colspan="4" style="text-align: left;">
+					<p:outputLabel styleClass="descricao" value="Atenção, esta informação não é desabonadora ao cliente" />
+				</p:column>
+			</p:row>
+			<p:row>  
+                <p:column colspan="2" style="text-align: left;">
+                	<p:outputLabel styleClass="descricao" value="Quantidade Total :" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESDEVOLVIDOSINFORMADOSUSUARIO().getDEFQUANTIDADETOTAL()}" />
+                </p:column>
+                <p:column colspan="2" style="text-align: left;">
+                	<p:outputLabel styleClass="descricao" value="Período: " />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESDEVOLVIDOSINFORMADOSUSUARIO().getDEFPERIODOINICIAL()}" />
+                	&nbsp;à&nbsp;
+                	<p:outputLabel value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESDEVOLVIDOSINFORMADOSUSUARIO().getDEFPERIODOFINAL()}" />                	
+                </p:column>                
+			</p:row>
+		</p:panelGrid>
+		<div class="subTitulo">
+			<p:outputLabel value="Últimas Ocorrências" rendered="#{!empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESDEVOLVIDOSINFORMADOSUSUARIO().getDEFQUANTIDADETOTAL()}"/>
+		</div>			
+		<p:dataTable widgetVar="dtPropUsu" id="dtPropUsu" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESDEVOLVIDOSINFORMADOSUSUARIO().getDEFULTIMASOCORRENCIAS().getDEFCHEQUEDEVOLVIDOINFORMADOUSUARIO()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESDEVOLVIDOSINFORMADOSUSUARIO().getDEFULTIMASOCORRENCIAS().getDEFCHEQUEDEVOLVIDOINFORMADOUSUARIO()}"
+			var="proprio" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Informante" colspan="2" style="text-align:left">
+				<p:outputLabel value="#{proprio.getDEFINFORMANTE()}" /> 
+			</p:column>			
+			<p:column headerText="Motivo" style="text-align:left">
+				<p:outputLabel value="#{proprio.getDEFMOTIVO()}" /> 
+			</p:column>
+			<p:column headerText="Banco" style="text-align:center">
+				<p:outputLabel value="#{proprio.getDEFBANCO()}" />
+			</p:column>
+			<p:column headerText="Agência" style="text-align:center">
+				<p:outputLabel value="#{proprio.getDEFAGENCIA()}" />
+			</p:column>
+			<p:column headerText="Cheques" colspan="2" style="text-align:center">
+				<p:outputLabel value="#{proprio.getDEFCHEQUESINICIAL()}" />
+				&nbsp;-&nbsp;
+				<p:outputLabel value="#{proprio.getDEFCHEQUESFINAL()}" /> 				 
+			</p:column>	
+			<p:column headerText="Registro" style="text-align:center">
+				<p:outputLabel value="#{proprio.getDEFDATAREGISTRO()}" /> 
+			</p:column>
+			<p:column headerText="Ocorrência" style="text-align:center">
+				<p:outputLabel value="#{proprio.getDEFDATADAOCORRENCIA()}" /> 
+			</p:column>
+			<p:column headerText="Cidade" colspan="2" style="text-align:center">
+				<p:outputLabel value="#{proprio.getDEFCIDADE()}" />
+				&nbsp;-&nbsp;
+				<p:outputLabel value="#{proprio.getDEFUF()}" /> 				
+			</p:column>																	
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFCHEQUESDEVOLVIDOSINFORMADOSUSUARIO().getDEFQUANTIDADETOTAL()}"/>
+		</div>
+		</div>
+		<br />		
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="PROTESTOS" />
+		</div>
+		<br />	
+		<p:panelGrid columns="5"  id="Protesto" styleClass="ui-noborder" style="width: 50%;"
+			rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFULTIMASOCORRENCIAS().getDEFPROTESTO()}">
+			<p:outputLabel styleClass="descricao" value="Informações do cliente" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />
+			<p:outputLabel styleClass="descricao" value="Data" />
+			<p:outputLabel styleClass="descricao" value="Valor(R$)" />
+			<p:outputLabel styleClass="descricao" value="Total de Pendências: " />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFTOTALPROTESTOS()}" />
+			<p:outputLabel styleClass="descricao" value="Primeiro:" />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFDATAPRIMEIRO()}" />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFVALORPRIMEIRO())}">
+				<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+			</p:outputLabel>
+			<p:outputLabel styleClass="descricao" value="Valor(R$): " />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFVALORTOTAL())}">
+				<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+			</p:outputLabel>
+			<p:outputLabel styleClass="descricao" value="Maior:" />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFDATAMAIOR()}" />
+			<p:outputLabel style="font-weight: normal; color: #282828" value="#{consultaController.strDouble(consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFVALORMAIOR())}">
+				<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+			</p:outputLabel>
+		</p:panelGrid>	
+		<div class="subTitulo">
+			<p:outputLabel value="Últimas Ocorrências" rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFULTIMASOCORRENCIAS().getDEFPROTESTO()}"/>
+		</div>	
+		<p:dataTable widgetVar="dtProtesto" id="dtProtesto" 
+			value="#{consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFULTIMASOCORRENCIAS().getDEFPROTESTO()}"
+		    rendered="#{not empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFULTIMASOCORRENCIAS().getDEFPROTESTO()}"
+			var="protesto" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Data" style="text-align:center">
+				<p:outputLabel value="#{protesto.getDEFDATA()}" />
+			</p:column>	
+			<p:column headerText="Vencimento" style="text-align:center">
+				<p:outputLabel value="#{protesto.getDEFVENCIMENTO()}" />
+			</p:column>	
+			<p:column headerText="Cartório" style="text-align:left">
+				<p:outputLabel value="#{protesto.getDEFCARTORIO()}" />
+			</p:column>			
+			<p:column headerText="Cidade" colspan="2" style="text-align:left">
+				<p:outputLabel value="#{protesto.getDEFCIDADE()}" />
+			</p:column>	
+			<p:column headerText="UF" style="text-align:left">
+				<p:outputLabel value="#{protesto.getDEFESTADO()}" />
+			</p:column>	
+			<p:column headerText="Valor(R$)" style="text-align:right">
+				<p:outputLabel value="#{consultaController.strDouble(protesto.getDEFVALOR())}">
+					<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+				</p:outputLabel>
+			</p:column>				
+		</p:dataTable>		
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.define.getRESPOSTA().getDEFINERESPOSTA().getDEFPROTESTOS().getDEFULTIMASOCORRENCIAS().getDEFPROTESTO()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div style="text-align: center; font-weight: bold;">
+			<p:outputLabel>
+				"As informações acima, são de uso exclusivo do destinatário, são protegidas por sigilo contratual. Sua utilização por outra,<br />
+				 pessoa, ou para finalidade diversa da contratada, caracteriza ilícito civil, tornando a prova imprestável para o processo."				
+			</p:outputLabel>
+		</div>
+		<br />
+		<br />
+		<hr />
+		<br />
+		<br />
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage library="imagens" name="ajaxloadingbar.gif" />
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

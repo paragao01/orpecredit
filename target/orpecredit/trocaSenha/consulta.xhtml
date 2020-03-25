@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><h:outputText value="Troca de senha do Usuário" /></title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+
+.ui-panelgrid>*>tr, .ui-panelgrid .ui-panelgrid-cell {
+	border: none;
+}
+</style>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<p:focus> </p:focus>
+		<h:panelGrid id="pg" columns="2">
+			<p:outputLabel value="Senha Atual : " />
+			<p:focus>
+				<p:password id="atual" label="Senha Atual" maxlength="10"
+					style="width:120px !important;" 
+					value="#{usuarioController.atualSenha}" required="true"
+					requiredMessage="Senha atual é obrigatória"> 
+						<f:validateLength minimum="5" maximum="10" />
+				</p:password>
+			 </p:focus>
+			<p:outputLabel value="Nova Senha : " />
+			<p:password id="nova" label="Nova Senha" maxlength="10"
+				style="width:120px !important;"
+				value="#{usuarioController.novaSenha}" required="true"
+				requiredMessage="Nova senha é obrigatória">
+				<f:validateLength minimum="5" maximum="10" />
+			</p:password>
+			<p:outputLabel value="Confirma Senha : " />
+			<p:password id="Confirma" label="Confirma Senha" maxlength="10"
+				style="width:120px !important;"
+				value="#{usuarioController.confSenha}" required="true"
+				requiredMessage="Confirmação da senha nova é obrigatória">
+				<f:validateLength minimum="5" maximum="10" />
+			</p:password>
+			<p:outputLabel />
+			<p:outputLabel />
+			<p:outputLabel />
+			<p:outputLabel />									
+			<p:commandButton value="Salvar" icon="ui-icon-disk" update="pg"
+				validateClient="true" actionListener="#{usuarioController.salvar}"
+				style="text-align: left;" />
+			<p:outputLabel />
+		</h:panelGrid>
+	</h:form>
+
+	<p:messages id="messages" autoUpdate="true" />
+
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage library="imagens" name="ajaxloadingbar.gif" />
+	</p:dialog>
+
+</h:body>
+</html>

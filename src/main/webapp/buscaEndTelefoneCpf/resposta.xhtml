@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="tituloNavegador" />Orpecredit -	Consulta BUSCA END+TELEFONE</title>
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="topo.css" />
+	<h:outputStylesheet library="css" name="barraMenu.css" />
+	<h:outputScript name="locales.js" library="js"></h:outputScript>
+	<style type="text/css">
+	.ui-widget-header {
+		background: #EAEAEA;
+		border: 0 none;
+		color: #104E8B;
+		-webkit-print-color-adjust: exact
+	}
+	.ui-datatable-subtable-header {
+		color: #104E8B; 
+		font-weight: bold;
+		background: #EAEAEA;
+		border: 0 none;
+		-webkit-print-color-adjust: exact
+	}
+	.alinhaVertical>tbody>tr>td {
+    	vertical-align: top;
+    	-webkit-print-color-adjust: exact
+	}
+	.ui-widget {
+		font-size: 110%;
+		-webkit-print-color-adjust: exact
+	}		
+	</style>
+</h:head>
+<h:body>
+	<h:form id="formConsulta" style="background-color: #ffffff;">
+		<br />	
+		<div id="noprint">
+			<p style="float: left;">&nbsp;</p> 
+			<p style="float: right;">
+			<p:commandButton value="Imprimir" type="button" 
+				ajax="false" onclick="window.print();" icon="ui-icon-print" />
+            </p>
+		</div>
+		<div style="clear: both;"></div>
+		<br />
+		<br />
+		<div id="logoOrpec">
+			<h:graphicImage style="float: left;"  library="imagens" name="logo_orpecredit.jpg" />
+			<h:graphicImage style="float: right;" library="imagens" name="orpec.png" />
+		</div>
+		<div style="clear: both;"></div>		
+		<br />
+		<hr />
+		<br />
+		<div>
+			<p style="float: left; font-size: 20px; margin: 5px;">Consulta BUSCA END+TELEFONE</p>
+			<p style="float: right;"> DATA :
+				<p:outputLabel value="#{consultaController.dataAtual}" />
+				&nbsp;&nbsp;
+			</p>
+		</div>
+		<div style="clear: both;"></div>
+		<div>
+			<p style="float: left; margin: 5px;">INFORMAÇÕES CONFIDENCIAIS</p>
+			<p style="float: right;"> HORA :
+				<p:outputLabel value="#{consultaController.horaAtual}" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</p>
+		</div>
+		<div style="clear: both;"></div>
+		<br />
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="IDENTIFICAÇÃO" />
+		</div>
+		<p:panelGrid id="ide" columns="3" styleClass="ui-noborder" style="width: 100%;" >
+			<p:outputLabel styleClass="descricao" value="Documento :" />
+			<p:outputLabel styleClass="descricao" value="Nome :" />
+			<p:outputLabel styleClass="descricao" value="Nome Mãe :" />			
+			<p:outputLabel value="#{consultaController.formataCPF(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500DOCUMENTO())}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500NOME()}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500MAE()}" />
+			<p:outputLabel styleClass="descricao" value="Situção CPF :" />
+			<p:outputLabel styleClass="descricao" value="Data de Atualização :" />
+			<p:outputLabel styleClass="descricao" value="Região de Origem do CPF :" />			
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500RECEITA()}" />
+			<p:outputLabel value="#{consultaController.converteData(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500ATUALIZACAO())}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500REGIAO()}" />
+			<p:outputLabel styleClass="descricao" value="Data Nascimento :" />
+			<p:outputLabel styleClass="descricao" value="Nacionalidade :" />
+			<p:outputLabel styleClass="descricao" value="Sexo :" />		
+			<p:outputLabel value="#{consultaController.converteData(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500NASC())}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500NACIONAL()}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500SEXO()}" />
+			<p:outputLabel styleClass="descricao" value="Grau de Instrução :" />
+			<p:outputLabel styleClass="descricao" value="Quantidade de dependentes :" />
+			<p:outputLabel styleClass="descricao" value="Estado Civil :" />			
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500INSTRUCAO()}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500DEPENDENTES()}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500CIVIL()}" />
+			<p:outputLabel styleClass="descricao" value="Titulo de Eleitor :" />
+			<p:outputLabel styleClass="descricao" value="Óbito :" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500TITULO()}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA500IDENTIFICA().getSPCA500OBITO()}" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />			
+		</p:panelGrid>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="LOCALIZAÇÃO" />
+		</div>
+		<p:panelGrid id="loc" columns="3" styleClass="ui-noborder" style="width: 100%;">
+			<p:outputLabel styleClass="descricao" value="Endereço :" />
+			<p:outputLabel styleClass="descricao" value="Complemento :" />
+			<p:outputLabel styleClass="descricao" value="Bairro :" />			
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501NOME()}  #{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501NUMERO()}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501COMPLEMENTO()}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501BAIRRO()}" />
+			<p:outputLabel styleClass="descricao" value="Cidade :" />
+			<p:outputLabel styleClass="descricao" value="CEP :" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />						
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501CIDADE()}" />
+			<p:outputLabel value="#{consultaController.formataCEP(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501CEP())}" />
+			<p:outputLabel value="&nbsp;" />						
+			<p:outputLabel styleClass="descricao" value="Telefone 1 :" />
+			<p:outputLabel styleClass="descricao" value="Telefone 2 :" />
+			<p:outputLabel styleClass="descricao" value="Telefone 3 :" />			
+			<p:outputLabel value="#{consultaController.formataTel(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501DDD1(), consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501TEL1())}" />
+			<p:outputLabel value="#{consultaController.formataTel(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501DDD2(), consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501TEL2())}" />
+			<p:outputLabel value="#{consultaController.formataTel(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501DDD3(), consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA501LOCALIZACAO().getSPCA501TEL3())}" />
+		</p:panelGrid>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="OUTRAS GRAFIAS" />
+		</div>
+		<p:dataTable widgetVar="dtGrafia" id="dtGrafia" 
+			value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA502GRAFIAS()}"
+		    rendered="#{not empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA502GRAFIAS()}"
+			var="grafia" style="width:100%; margin: 0 auto;">
+			<p:column>
+				<p:panelGrid id="gra" columns="3" styleClass="ui-noborder" style="width: 100%;" >
+					<p:outputLabel styleClass="descricao" value="Nome :" />
+					<p:outputLabel styleClass="descricao" value="Documento :" />
+					<p:outputLabel styleClass="descricao" value="Data Nascimento :" />					
+					<p:outputLabel value="#{grafia.getSPCA502NOME()}" />
+					<p:outputLabel value="#{consultaController.formataCPF(grafia.getSPCA502CPF())}" />					
+					<p:outputLabel value="#{consultaController.converteData(grafia.getSPCA502NASCIMENTO())}" />
+					<p:outputLabel styleClass="descricao" value="Endereço :" />
+					<p:outputLabel styleClass="descricao" value="Complemento :" />
+					<p:outputLabel styleClass="descricao" value="Bairro :" />					
+					<p:outputLabel value="#{grafia.getSPCA502LOGRADOURO()}  #{grafia.getSPCA502NUMERO()}" />
+					<p:outputLabel value="#{grafia.getSPCA502COMPLEMENTO()}" />
+					<p:outputLabel value="#{grafia.getSPCA502BAIRRO()}" />
+					<p:outputLabel styleClass="descricao" value="Cidade :" />
+					<p:outputLabel styleClass="descricao" value="CEP :" />
+					<p:outputLabel styleClass="descricao" value="&nbsp;" />			
+					<p:outputLabel value="#{grafia.getSPCA502CIDADE()}" />
+					<p:outputLabel value="#{consultaController.formataCEP(grafia.getSPCA502CEP())}" />
+					<p:outputLabel value="&nbsp;" />
+					<p:outputLabel styleClass="descricao" value="Telefone 1 :" />
+					<p:outputLabel styleClass="descricao" value="Telefone 2 :" />
+					<p:outputLabel styleClass="descricao" value="Telefone 3 :" />					
+					<p:outputLabel value="#{consultaController.formataTel(grafia.getSPCA502DDD1(), grafia.getSPCA502TEL1())}" />
+					<p:outputLabel value="#{consultaController.formataTel(grafia.getSPCA502DDD2(), grafia.getSPCA502TEL2())}" />
+					<p:outputLabel value="#{consultaController.formataTel(grafia.getSPCA502DDD3(), grafia.getSPCA502TEL3())}" />
+				</p:panelGrid>
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA502GRAFIAS()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="TELEFONES VINCULADOS" />
+		</div>
+		<p:dataTable widgetVar="dtTelVinc" id="dtTelVinc" 
+			value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA131TELEFONE().getSPCA131DOCVINCULADO()}"
+		    rendered="#{not empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA131TELEFONE().getSPCA131DOCVINCULADO()}"
+			var="telefone" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Telefone" style="text-align:left">
+				<p:outputLabel value="#{consultaController.formataTel(telefone.getSPCA131DDD(), telefone.getSPCA131NUMERO())}" />
+			</p:column>
+			<p:column headerText="Endereço" style="text-align:left" colspan="3">
+				<p:outputLabel value="#{telefone.getSPCA131ENDERECO()}" />
+			</p:column>
+			<p:column headerText="Bairro" style="text-align:left"  colspan="2">
+				<p:outputLabel value="#{telefone.getSPCA131BAIRRO()}" />
+			</p:column>
+			<p:column headerText="Cidade" style="text-align:left" colspan="2">
+				<p:outputLabel value="#{telefone.getSPCA131CIDADE()}" />
+			</p:column>
+			<p:column headerText="UF" style="text-align:left">
+				<p:outputLabel value="#{telefone.getSPCA131UF()}" />
+			</p:column>
+			<p:column headerText="CEP" style="text-align:left">
+				<p:outputLabel value="#{consultaController.formataCEP(telefone.getSPCA131CEP())}" />
+			</p:column>
+			
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA131TELEFONE().getSPCA131DOCVINCULADO()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div style="text-align: center; font-weight: bold;">
+			<p:outputLabel>
+				"As informações acima, são de uso exclusivo do destinatário, são protegidas por sigilo contratual. Sua utilização por outra,<br />
+				 pessoa, ou para finalidade diversa da contratada, caracteriza ilícito civil, tornando a prova imprestável para o processo."				
+			</p:outputLabel>
+		</div>
+		<br />
+		<br />
+		<hr />
+		<br />
+		<br />
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage library="imagens" name="ajaxloadingbar.gif" />
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

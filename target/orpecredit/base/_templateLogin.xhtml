@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="tituloNavegador" />   Orpecredit</title>
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="topo.css" />
+	<h:outputStylesheet library="css" name="barraMenu.css" />
+	
+	<h:outputScript name="locales.js" library="js"></h:outputScript>
+</h:head>
+
+<h:body>
+	<div id="tudo">
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<div id="topo">
+			<div id="faixa_pesquisa">
+				<div id="conteinerForms"></div>
+				<!-- 
+				<div id="strNome">
+					<ui:insert name="nome">
+						<p:outputLabel
+							value="#{applicationSessionController.usuarioSessao.nome}" />
+					</ui:insert>
+				</div>
+				-->
+			</div>
+			<div id="logo">
+				<h:graphicImage library="imagens" name="logo_orpecredit.jpg" style="border:0;" />
+			</div>
+			<div id="menu_fixo">
+				<div id="itens_menu_fixo">
+					<h:outputText value="Orpecredit - Consulta" />
+				</div>
+			</div>
+		</div>
+
+		<ui:insert name="menu">
+			<ui:include src="/base/barra_menu.xhtml" />
+		</ui:insert>
+
+		<ui:insert name="menuOpcao">
+			<ui:include src="/base/menu_consulta.xhtml" />
+		</ui:insert>
+
+		<div id="divConteudo">
+			<ui:insert name="corpo" />
+		</div>
+
+		<br class="clear" />
+		
+		<div id="rodape">Sistema de Consultas para Decisão de Crédito.</div>
+
+	</div>
+
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage library="imagens" name="ajaxloadingbar.gif" />
+	</p:dialog>
+
+</h:body>
+</html>

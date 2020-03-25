@@ -1,0 +1,26 @@
+
+#menu_horizontal{
+	width: 998px;
+	height: 27px;
+	margin: auto;
+	font-family: 'Trebuchet MS',Arial;
+	font-size: 10px;
+	margin-top: 5px;
+}
+
+#cmdLogOut {
+	border: 0px; 
+	background-color: #8c0918;
+	color: #FFFFFF; 
+	cursor: pointer;
+	padding: 4px 5px;
+}
+
+#cmdLogOut:hover {
+	background-color: #e09ca6;
+}
+
+.ui-menu .ui-menu-parent  .ui-menu-child {  
+    white-space:nowrap !important;  
+    width:300px !important;  
+}  

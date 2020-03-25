@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition>
+	<h:form rendered="#{!empty applicationSessionController.usuarioSessao}">
+		<div align="center">
+		<p:panelGrid columns="1" style="margin-top:50px; margin-left: 270px; float: left; font-weight: bold;">
+		    <div  class="cabConsulta">
+		    	&nbsp;&nbsp;&nbsp;CONSULTA PARA CPF&nbsp;&nbsp;&nbsp;
+		    </div>
+			<p:commandLink value="PESSOAL GOLD"          action="/pessoalGold/consulta.jsf"         rendered="#{applicationSessionController.getServico('[48]')}" />
+			<p:commandLink value="PESSOAL PLUS NACIONAL" action="/scpcnetNacCPF/consulta.jsf"       rendered="#{applicationSessionController.getServico('[24]')}" />					    
+			<p:commandLink value="PESSOAL PLUS ESTADUAL" action="/scpcnetEstCPF/consulta.jsf"       rendered="#{applicationSessionController.getServico('[1]')}" />
+			<p:commandLink value="BUSCA END+TELEFONE"    action="/buscaEndTelefoneCpf/consulta.jsf" rendered="#{applicationSessionController.getServico('[53]')}" />
+			<p:commandLink value="ORPEC PESSOAL"         action="/crediOnlineCPF/consulta.jsf"      rendered="#{applicationSessionController.getServico('[60]')}" />
+					    
+		</p:panelGrid>
+		<p:panelGrid columns="1" style="margin-top:50px; margin-right: 270px; float: right; font-weight: bold;">
+		    <div  class="cabConsulta">
+		    	&nbsp;&nbsp;&nbsp;CONSULTA PARA CNPJ&nbsp;&nbsp;&nbsp;
+		    </div>
+			<p:commandLink value="EMPRESARIAL GOLD"      	 action="/empresarialGold/consulta.jsf"      rendered="#{applicationSessionController.getServico('[52]')}" />
+			<p:commandLink value="EMPRESARIAL PLUS NACIONAL" action="/scpcnetNacCNPJ/consulta.jsf"       rendered="#{applicationSessionController.getServico('[47]')}" />					    
+			<p:commandLink value="EMPRESARIAL PLUS ESTADUAL" action="/scpcnetEstCNPJ/consulta.jsf"       rendered="#{applicationSessionController.getServico('[40]')}" />
+			<p:commandLink value="BUSCA END+TELEFONE"        action="/buscaEndTelefoneCnpj/consulta.jsf" rendered="#{applicationSessionController.getServico('[71]')}" />
+			<p:commandLink value="ORPEC EMPRESARIAL"         action="/crediOnlineCNPJ/consulta.jsf"      rendered="#{applicationSessionController.getServico('[55]')}" />		    
+		</p:panelGrid>
+ 		</div>
+ 		<div style="clear: both;"></div>
+ 		<h:panelGroup layout="block" rendered="#{applicationSessionController.getServico('[72]')}">
+			<div align="center">
+				<p:panelGrid columns="1" style="margin-top:30px; margin-center: 270px; float: center; font-weight: bold;">
+		    		<div  class="cabConsulta">
+		    			&nbsp;&nbsp;&nbsp;NEGATIVA&Ccedil;&Atilde;O&nbsp;&nbsp;&nbsp;
+		    		</div>
+					<p:commandLink value="INCLUS&Atilde;O"  action="/negativacao/inclusao.jsf" />
+					<p:commandLink value="RELAT&Oacute;RIO"	action="/negativacao/baixa.jsf" />					    
+				</p:panelGrid>
+			</div> 		
+ 			<div style="clear: both;"></div>
+ 		</h:panelGroup>
+	</h:form>
+</ui:composition>
+</html>
+
