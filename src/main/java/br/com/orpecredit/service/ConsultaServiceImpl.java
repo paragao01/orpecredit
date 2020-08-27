@@ -24,6 +24,20 @@ public class ConsultaServiceImpl implements ConsultaService{
 	}
 
 	@Override
+	public br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta(String cpf) {
+		
+		br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta = null;
+		
+		usu = (Usuario) sessao.getUsuarioSessao();
+		
+		if(usu != null) {
+			acerta = cdlrio.consultaCdlRioAcerta("[73]", usu.getLogin(), usu.getSenha(), cpf, usu.getIp());
+		}
+			
+		return acerta;
+	}
+
+	@Override
 	public br.com.orpecredit.wscdlrio.acerta.SPCAXML acertaEssencial(String cpf) {
 		
 		br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta = null;
@@ -36,7 +50,7 @@ public class ConsultaServiceImpl implements ConsultaService{
 			
 		return acerta;
 	}
-
+	
 	@Override
 	public br.com.orpecredit.wscdlrio.acerta.SPCAXML acertaCadastral(String cpf) {
 		
@@ -136,14 +150,18 @@ public class ConsultaServiceImpl implements ConsultaService{
 	}
 	
 	@Override
-	public br.com.orpecredit.wscdlrio.define.SPCAXML defineRisco(String cnpj, ProdutoDefine pd) {
+	public br.com.orpecredit.wscdlrio.define.SPCAXML defineRisco(String cnpj, ProdutoDefine pd, String produto) {
 		
 		br.com.orpecredit.wscdlrio.define.SPCAXML defineRisco = null;
 		
 		usu = (Usuario) sessao.getUsuarioSessao();
 		
 		if(usu != null) {
-			defineRisco = cdlrio.consultaCdlRioDefine("[52]", usu.getLogin(), usu.getSenha(), cnpj, pd, usu.getIp());
+			if(produto.equals("[52]")) {
+				defineRisco = cdlrio.consultaCdlRioDefine(produto, usu.getLogin(), usu.getSenha(), cnpj, pd, usu.getIp());
+			}else if(produto.equals("[74]")) {
+				defineRisco = cdlrio.consultaCdlRioDefine(produto, usu.getLogin(), usu.getSenha(), cnpj, pd, usu.getIp());
+			}
 		}
 			
 		return defineRisco;

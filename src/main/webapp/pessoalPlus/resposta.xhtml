@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="tituloNavegador" />Orpecredit -	Consulta PESSOAL PLUS</title>
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="topo.css" />
+	<h:outputStylesheet library="css" name="barraMenu.css" />
+	<h:outputScript name="locales.js" library="js"></h:outputScript>
+	<style type="text/css">
+	.ui-widget-header {
+		background: #EAEAEA;
+		border: 0 none;
+		color: #104E8B;
+		-webkit-print-color-adjust: exact
+	}
+	.ui-datatable-subtable-header {
+		color: #104E8B; 
+		font-weight: bold;
+		background: #EAEAEA;
+		border: 0 none;
+		-webkit-print-color-adjust: exact
+	}
+	.alinhaVertical>tbody>tr>td {
+    	vertical-align: top;
+    	-webkit-print-color-adjust: exact
+	}
+	.ui-widget {
+		font-size: 110%;
+		-webkit-print-color-adjust: exact
+	}		
+	</style>
+</h:head>
+<h:body>
+	<h:form id="formConsulta" style="background-color: #ffffff;">
+		<br />	
+		<div id="noprint">
+			<p style="float: left;">&nbsp;</p> 
+			<p style="float: right;">
+			<p:commandButton value="Imprimir" type="button" 
+				ajax="false" onclick="window.print();" icon="ui-icon-print" />
+            </p>
+		</div>
+		<div style="clear: both;"></div>
+		<br />
+		<br />
+		<div id="logoOrpec">
+			<h:graphicImage style="float: left;"  library="imagens" name="logo_orpecredit.jpg" />
+			<h:graphicImage style="float: right;" library="imagens" name="orpec.png" />
+		</div>
+		<div style="clear: both;"></div>		
+		<br />
+		<hr />
+		<br />
+		<div>
+			<p style="float: left; font-size: 20px; margin: 5px;">Consulta PESSOAL PLUS</p>
+			<p style="float: right;"> DATA :
+				<p:outputLabel value="#{consultaController.dataAtual}" />
+				&nbsp;&nbsp;
+			</p>
+		</div>
+		<div style="clear: both;"></div>
+		<div>
+			<p style="float: left; margin: 5px;">INFORMAÇÕES CONFIDENCIAIS</p>
+			<p style="float: right;"> HORA :
+				<p:outputLabel value="#{consultaController.horaAtual}" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</p>
+		</div>
+		<div style="clear: both;"></div>
+		<br />
+		<div class="divBorda">				
+		<div class="titulo">
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA601SCORECRED().get(0).getSPCA601DESCRICAO().getSPCA601DSCORE().substring(3, consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA601SCORECRED().get(0).getSPCA601DESCRICAO().getSPCA601DSCORE().length())}" />
+		</div>
+		<p:panelGrid id="sco" styleClass="ui-noborder">
+			<p:row>  
+                <p:column>
+                	<p:outputLabel styleClass="descricao" value="Score:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.retiraZeros(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA601SCORECRED().get(0).getSPCA601SCORE())}" />
+                </p:column>
+                <p:column>
+                	<p:outputLabel styleClass="descricao" value="Probabilidade de Inadimplencia :" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.percentual(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA601SCORECRED().get(0).getSPCA601PROVAVEL())}%">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" maxFractionDigits="2"/>
+					</p:outputLabel>                	
+                </p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>    
+                <p:column><p:outputLabel>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p:outputLabel></p:column>                                            
+            </p:row>                
+			<p:row> 
+                <p:column colspan="6"><p:outputLabel styleClass="descricao" value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA601SCORECRED().get(0).getSPCA601TEXTO()}" /></p:column>			            
+			</p:row>								
+		</p:panelGrid>	
+		</div>
+		<br />
+		<br />
+		
+		<div class="divBorda">									
+		<div class="titulo">
+			<p:outputLabel value="IDENTIFICAÇÃO" />
+		</div>
+		<p:panelGrid id="ide" columns="3" styleClass="ui-noborder" style="width: 100%;" >
+			<p:outputLabel styleClass="descricao" value="Documento :" />
+			<p:outputLabel styleClass="descricao" value="Nome :" />
+			<p:outputLabel styleClass="descricao" value="Nome Mãe :" />			
+			<p:outputLabel value="#{consultaController.formataCPF(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA221SINTESE().getSPCA221CPF())}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA221SINTESE().getSPCA221NOME()}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA221SINTESE().getSPCA221MAE()}" />
+			<p:outputLabel styleClass="descricao" value="Data Nascimento :" />
+			<p:outputLabel styleClass="descricao" value="Titulo de Eleitor :" />
+			<p:outputLabel styleClass="descricao" value="&nbsp;" />
+			<p:outputLabel value="#{consultaController.converteData(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA221SINTESE().getSPCA221NASCIMENTO())}" />
+			<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA221SINTESE().getSPCA221TITELEITOR()}" />
+			<p:outputLabel value="&nbsp;" />			
+		</p:panelGrid>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">				
+		<div class="titulo">
+			<p:outputLabel value="OUTRAS INFORMAÇÕES" />
+		</div>
+		<p:dataTable widgetVar="dtOutrasInfor" id="dtOutrasInfor" 
+			value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA123INFORMACAO().getSPCA123COMPLEMENTAR()}"
+		    rendered="#{not empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA123INFORMACAO().getSPCA123COMPLEMENTAR()}"
+			var="outrasInfor" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Descrição" style="width:150px; text-align:left">
+				<p:outputLabel value="#{outrasInfor.getSPCA123DESCRICAO()}" />
+			</p:column>
+			<p:column headerText="UF" style="width:20px; text-align:center">
+				<p:outputLabel value="#{outrasInfor.getSPCA123UF()}" />
+			</p:column>
+			<p:column headerText="Texto" style="width:250px; text-align:left">
+				<p:outputLabel value="#{outrasInfor.getSPCA123TEXTO()}" />
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA123INFORMACAO().getSPCA123COMPLEMENTAR()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">				
+		<div class="titulo">
+			<p:outputLabel value="REGISTRO DE DÉBITO" />
+		</div>
+		<p:panelGrid id="deb" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO()}">
+			<p:row>  
+                <p:column colspan="4" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Valor Total:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.strDouble(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO().getSPCA108RESUMO().getSPCA108TOTAL().getSPCA108VALOR())}">
+                		<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                	</p:outputLabel>
+                </p:column>
+			</p:row>
+			<p:row>  
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Total de registros do avalista:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO().getSPCA108RESUMO().getSPCA108TOTAL().getSPCA108AVALISTA()==null?'0':consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO().getSPCA108RESUMO().getSPCA108TOTAL().getSPCA108AVALISTA()}" />
+                </p:column>
+				<p:column colspan="2" style="text-align: center;">
+					<p:outputLabel styleClass="descricao" value="Total de registros do comprador:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>					
+					<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO().getSPCA108RESUMO().getSPCA108TOTAL().getSPCA108DEVEDOR()==null?'0':consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO().getSPCA108RESUMO().getSPCA108TOTAL().getSPCA108DEVEDOR()}" />
+				</p:column>
+			</p:row>
+			<p:row>  
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Data do primeiro registro:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.converteData(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO().getSPCA108RESUMO().getSPCA108PRIMEIRODEB().getSPCA108PDATA())}" />
+                </p:column>
+				<p:column colspan="2" style="text-align: center;">
+					<p:outputLabel styleClass="descricao" value="Valor do primeiro:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>					
+					<p:outputLabel value="#{consultaController.strDouble(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO().getSPCA108RESUMO().getSPCA108PRIMEIRODEB().getSPCA108PVALOR())}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2" maxFractionDigits="2" currencySymbol="R$"/>
+					</p:outputLabel>					
+				</p:column>
+			</p:row>
+			<p:row>  
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Data do maior registro:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.converteData(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO().getSPCA108RESUMO().getSPCA108MAIORDEB().getSPCA108MDATA())}" />
+                </p:column >
+				<p:column colspan="2" style="text-align: center;">
+					<p:outputLabel styleClass="descricao" value="Valor do maior:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>					
+					<p:outputLabel value="#{consultaController.strDouble(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO().getSPCA108RESUMO().getSPCA108MAIORDEB().getSPCA108MVALOR())}">
+							<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+					</p:outputLabel>			
+				</p:column>
+			</p:row>			
+		</p:panelGrid>
+		<p:dataTable widgetVar="dtRegDeb" id="dtRegDeb" 
+			value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA124DEBITO()}"
+		    rendered="#{not empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA124DEBITO()}"
+			var="regDebito" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Data Ocorrência" style="text-align:center">
+				<p:outputLabel value="#{consultaController.converteData(regDebito.getSPCA124DATA().getSPCA124REGISTRO())}" />
+			</p:column>
+			<p:column headerText="Data Disponível" style="text-align:center">
+				<p:outputLabel value="#{consultaController.converteData(regDebito.getSPCA124DATA().getSPCA124DISPONIVEL())}" />
+			</p:column>
+			<p:column headerText="Informante" colspan="3" style="text-align:left">
+				<p:outputLabel value="#{regDebito.getSPCA124INFORMANTE()}" />
+			</p:column>
+			<p:column headerText="Tipo" style="text-align:left">
+				<p:outputLabel value="#{regDebito.getSPCA124TIPO()}" />
+			</p:column>
+			<p:column headerText="N&uacute;mero Contrato" colspan="2" style="text-align:left">
+				<p:outputLabel value="#{regDebito.getSPCA124CONTRATO()}" />
+			</p:column>			
+			<p:column headerText="Valor(R$)" style="text-align:right">
+				<p:outputLabel value="#{consultaController.strDouble(regDebito.getSPCA124VALORN())}">
+					<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>	
+				</p:outputLabel>
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA108DEBITO()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="PROTESTOS" />
+		</div>
+		<p:panelGrid id="pro" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA022PROTESTOS()}">
+			<p:row>  
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Total dos títulos protestados:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA022PROTESTOS().getSPCA022RESUMO().getSPCA022TOTAL()}" />
+                </p:column>
+				<p:column colspan="2" style="text-align: center;">
+					<p:outputLabel styleClass="descricao" value="Valor Acumulado (R$):" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>					
+                	<p:outputLabel value="#{consultaController.strDouble(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA022PROTESTOS().getSPCA022RESUMO().getSPCA022VALORES().getSPCA022VALOR())}">
+                		<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>
+                	</p:outputLabel>
+				</p:column>
+			</p:row>
+			<p:row>  
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Primeiro título protestado em:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.converteData(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA022PROTESTOS().getSPCA022RESUMO().getSPCA022DATA().getSPCA022PRIMEIRA())}" />
+                </p:column>
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Último título protestado em :" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.converteData(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA022PROTESTOS().getSPCA022RESUMO().getSPCA022DATA().getSPCA022ULTIMA())}" />
+                </p:column>                
+			</p:row>
+		</p:panelGrid>
+		<p:dataTable widgetVar="dtProtesto" id="dtProtesto" 
+			value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA022PROTESTOS().getSPCA023REGISTRO()}"
+		    rendered="#{not empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA022PROTESTOS()}"
+			var="protesto" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Data do Protesto" style="text-align:center">
+				<p:outputLabel value="#{consultaController.converteData(protesto.getSPCA023DATA())}" />
+			</p:column>
+			<p:column headerText="Cartório" style="text-align:center">
+				<p:outputLabel value="#{protesto.getSPCA023CARTORIO()!=null ? ('0'.concat(protesto.getSPCA023CARTORIO()).concat('&ordm;')) : ''}" />
+			</p:column>
+			<p:column headerText="Cidade" colspan="2" style="text-align:left">
+				<p:outputLabel value="#{protesto.getSPCA023PRACA()}" />
+			</p:column>
+			<p:column headerText="UF" style="text-align:center">
+				<p:outputLabel value="#{protesto.getSPCA023ESTADO()}" />
+			</p:column>
+			<p:column headerText="Valor(R$)" style="text-align:right">
+				<p:outputLabel value="#{consultaController.strDouble(protesto.getSPCA023VALOR())}">
+					<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>	
+				</p:outputLabel>
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA022PROTESTOS()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="CONSULTAS ANTERIORES" />
+		</div>
+		<p:panelGrid id="cons" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA()}">
+			<p:row>  
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Total de consultas :" />
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111TOTAL()}" />
+                </p:column>
+            </p:row>
+            <p:row>
+				<p:column colspan="10" style="text-align: center;">
+					<p:outputLabel styleClass="descricao" value="At&eacute;" />
+                	<p:outputLabel value="&nbsp;"/>					
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA1().getSPCA111ANO1()}/#{consultaController.zeroLeft(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA1().getSPCA111MES1(),2)}:&nbsp;#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA1().getSPCA111QTD1()}"/>
+                	<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA2().getSPCA111ANO2()}/#{consultaController.zeroLeft(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA2().getSPCA111MES2(),2)}:&nbsp;#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA2().getSPCA111QTD2()}"/>
+                	<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA3().getSPCA111ANO3()}/#{consultaController.zeroLeft(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA3().getSPCA111MES3(),2)}:&nbsp;#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA3().getSPCA111QTD3()}"/>
+                	<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA4().getSPCA111ANO4()}/#{consultaController.zeroLeft(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA4().getSPCA111MES4(),2)}:&nbsp;#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA().getSPCA111RESUMO().getSPCA111DATA4().getSPCA111QTD4()}"/>
+                	<p:outputLabel value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<p:dataTable widgetVar="dtConsulta" id="dtConsulta" 
+			value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA126CONSULTA()}"
+		    rendered="#{not empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA126CONSULTA()}"
+			var="consulta" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Data" style="text-align:center">
+				<p:outputLabel value="#{consultaController.converteData(consulta.getSPCA126DATA())}" />
+			</p:column>
+			<p:column headerText="Empresa" colspan="3" style="text-align:left">
+				<p:outputLabel value="#{consulta.getSPCA126INFORMANTE()}" />
+			</p:column>
+			<p:column headerText="Tipo Cr&eacute;dito" style="text-align:left">
+				<p:outputLabel value="#{consulta.getSPCA126DESCRICAO()}" />
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA111CONSULTA()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="CHEQUE SEM FUNDO" />
+		</div>
+		<p:panelGrid id="chqSemFundo" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA214CCFRESUMO().getSPCA214DEVOLUCOES()}">
+			<p:row>  
+                <p:column colspan="4" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Total de Cheques :" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA214CCFRESUMO().getSPCA214DEVOLUCOES().getSPCA214DEVOLVIDOS().getSPCA214TOTAL()}" />
+                </p:column>
+			</p:row>
+			<p:row>  
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Nome :" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA214CCFRESUMO().getSPCA214DEVOLUCOES().getSPCA214NOME()}" />
+                </p:column>
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Documento:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.formataCPF(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA214CCFRESUMO().getSPCA214DEVOLUCOES().getSPCA214DOCUMENTO())}" />
+                </p:column>                
+			</p:row>
+		</p:panelGrid>
+		<p:dataTable widgetVar="dtSemFundo" id="dtSemFundo" 
+			value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA242CCF().getSPCA242DEVOLUCOES()}"
+		    rendered="#{not empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA242CCF().getSPCA242DEVOLUCOES()}"
+			var="semFundo" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Qtde." style="text-align:center">
+				<p:outputLabel value="#{semFundo.getSPCA242MOTIVO12().getSPCA24212TOTAL()}" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO12().getSPCA24212TOTAL()}"/>
+				<p:outputLabel value="#{semFundo.getSPCA242MOTIVO13().getSPCA24213TOTAL()}" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO13().getSPCA24213TOTAL()}"/>
+				<p:outputLabel value="#{semFundo.getSPCA242MOTIVO14().getSPCA24214TOTAL()}" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO14().getSPCA24214TOTAL()}"/>
+				<p:outputLabel value="#{semFundo.getSPCA242MOTIVO99().getSPCA24299TOTAL()}" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO99().getSPCA24299TOTAL()}"/>
+			</p:column>
+			<p:column headerText="Data Último" style="text-align:center">
+				<p:outputLabel value="#{consultaController.converteData(semFundo.getSPCA242MOTIVO12().getSPCA24212DTULTIMO())}" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO12().getSPCA24212TOTAL()}"/>
+				<p:outputLabel value="#{consultaController.converteData(semFundo.getSPCA242MOTIVO13().getSPCA24213DTULTIMO())}" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO13().getSPCA24213TOTAL()}"/>
+				<p:outputLabel value="#{consultaController.converteData(semFundo.getSPCA242MOTIVO14().getSPCA24214DTULTIMO())}" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO14().getSPCA24214DTULTIMO()}"/>
+				<p:outputLabel value="#{consultaController.converteData(semFundo.getSPCA242MOTIVO99().getSPCA24299DTULTIMO())}" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO99().getSPCA24299DTULTIMO()}"/>
+			</p:column>				
+			<p:column headerText="Banco" style="text-align:center">
+				<p:outputLabel value="#{semFundo.getSPCA242BANCO()}" />
+			</p:column>			
+			<p:column headerText="Agência" style="text-align:center">
+				<p:outputLabel value="#{semFundo.getSPCA242AGENCIA()}" />
+			</p:column>			
+			<p:column headerText="Motivo" colspan="2" style="text-align:center">
+				<p:outputLabel value="12 - DEVOLUCAO, 2. APRESENTACAO" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO12().getSPCA24212DTULTIMO()}"/>			
+				<p:outputLabel value="13 - CONTA ENCERRADA" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO13().getSPCA24213DTULTIMO()}"/>
+				<p:outputLabel value="14 - PRATICA ESPURIA" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO14().getSPCA24214DTULTIMO()}"/>
+				<p:outputLabel value="99" 
+							rendered="#{not empty semFundo.getSPCA242MOTIVO99().getSPCA24299DTULTIMO()}"/>	
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA242CCF().getSPCA242DEVOLUCOES()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="DEVOLUÇÕES INFORMADAS PELO USUÁRIO" />
+		</div>
+		<p:panelGrid id="chqDveUsu" styleClass="ui-noborder" style="width: 100%;" 
+		             rendered="#{!empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA268CHDEVOLVIDO()}">
+			<p:row>  
+                <p:column colspan="4" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Total de cheques devolvidos:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA268CHDEVOLVIDO().getSPCA268USUARIOS().getSPCA268TOTAL()}" />
+                </p:column>
+			</p:row>
+			<p:row>  
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Data do primeiro cheque devolvido:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.converteData(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA268CHDEVOLVIDO().getSPCA268USUARIOS().getSPCA268DATA().getSPCA268PRIMEIRA())}" />
+                </p:column>
+                <p:column colspan="2" style="text-align: center;">
+                	<p:outputLabel styleClass="descricao" value="Data do cheque devolvido mais recente:" />
+                	<p:outputLabel>&nbsp;</p:outputLabel>
+                	<p:outputLabel value="#{consultaController.converteData(consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA268CHDEVOLVIDO().getSPCA268USUARIOS().getSPCA268DATA().getSPCA268ULTIMA())}" />
+                </p:column>                
+			</p:row>
+		</p:panelGrid>
+		<p:dataTable widgetVar="dtDevUsu" id="dtDevUsu" 
+			value="#{consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA244CHDEVOLUCAO().getSPCA244PORUSUARIO()}"
+		    rendered="#{not empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA244CHDEVOLUCAO()}"
+			var="devUsu" style="width:100%; margin: 0 auto;">
+			<p:column headerText="Banco" style="text-align:center">
+				<p:outputLabel value="#{devUsu.getSPCA244BANCO()}" />
+			</p:column>			
+			<p:column headerText="Agência" style="text-align:center">
+				<p:outputLabel value="#{devUsu.getSPCA244AGENCIA()}" />
+			</p:column>			
+			<p:column headerText="Conta" style="text-align:center">
+				<p:outputLabel value="#{devUsu.getSPCA244CONTA()}" />
+			</p:column>
+			<p:column headerText="Inicial" style="text-align:center">
+				<p:outputLabel value="#{devUsu.getSPCA244CHEQUES().getSPCA244INICIAL()==null? '1' : devUsu.getSPCA244CHEQUES().getSPCA244INICIAL()}" />
+			</p:column>
+			<p:column headerText="Final" style="text-align:center">
+				<p:outputLabel value="#{devUsu.getSPCA244CHEQUES().getSPCA244FINAL()}" />
+			</p:column>		
+			<p:column headerText="Alínea" style="text-align:center">
+				<p:outputLabel value="#{devUsu.getSPCA244ALINEA().getSPCA244ANUMERO()}" />
+			</p:column>							
+			<p:column headerText="UF/Cidade" colspan="2" style="text-align:left">
+				<p:outputLabel value="#{devUsu.getSPCA244UF()}" />-
+				<p:outputLabel value="#{devUsu.getSPCA244CIDADE()}" />
+			</p:column>
+			<p:column headerText="Data Ocorrência" style="text-align:center">
+				<p:outputLabel value="#{consultaController.converteData(devUsu.getSPCA244DATA().getSPCA244REGISTRO())}" />
+			</p:column>
+			<p:column headerText="Data Disponibilização" style="text-align:center">
+				<p:outputLabel value="#{consultaController.converteData(devUsu.getSPCA244DATA().getSPCA244DISPONIVEL())}" />
+			</p:column>			
+			<p:column headerText="Informante" colspan="2" style="text-align:left">
+				<p:outputLabel value="#{devUsu.getSPCA244INFORMANTE()}" />
+			</p:column>			
+			<p:column headerText="Valor(R$)" style="text-align:right">
+				<p:outputLabel value="#{consultaController.strDouble(devUsu.getSPCA244VALORN())}">
+					<f:convertNumber locale="pt_BR" pattern="#,##0.00"/>	
+				</p:outputLabel>
+			</p:column>
+		</p:dataTable>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" rendered="#{empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA268CHDEVOLVIDO()}"/>
+		</div>
+		</div>
+		<br />
+		<br />
+
+		<div class="divBorda">
+		<div class="titulo">
+			<p:outputLabel value="CHEQUES SUSTADOS MOTIVO 21" />
+		</div>
+		<div class="nada-consta">
+			<p:outputLabel value="Nada Consta" />
+		</div>
+		</div>
+		<br />
+		<br />
+		<br />
+
+		<div style="text-align: center; font-weight: bold;">
+			<p:outputLabel>
+				"As informações acima, são de uso exclusivo do destinatário, são protegidas por sigilo contratual. Sua utilização por outra,<br />
+				 pessoa, ou para finalidade diversa da contratada, caracteriza ilícito civil, tornando a prova imprestável para o processo."				
+			</p:outputLabel>
+		</div>
+		<br />
+		<br />
+		<hr />
+		<br />
+		<br />
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage library="imagens" name="ajaxloadingbar.gif" />
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

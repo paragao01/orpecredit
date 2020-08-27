@@ -13,6 +13,9 @@ public interface ConsultaService {
 	void consultaLogin();
 
 	@Transactional(readOnly = true)
+	br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta(String cpf);
+	
+	@Transactional(readOnly = true)
 	br.com.orpecredit.wscdlrio.acerta.SPCAXML acertaEssencial(String cpf);
 
 	@Transactional(readOnly = true)
@@ -37,7 +40,7 @@ public interface ConsultaService {
 	String crediOnlineCNPJ(String cnpj);
 	
 	@Transactional(readOnly = true)
-	br.com.orpecredit.wscdlrio.define.SPCAXML defineRisco(String cnpj, ProdutoDefine pd);
+	br.com.orpecredit.wscdlrio.define.SPCAXML defineRisco(String cnpj, ProdutoDefine pd, String produto);
 	
 	@Transactional(readOnly = true)
 	br.com.orpecredit.wscdlrio.define.SPCAXML defineCadastro(String cnpj, ProdutoDefine pd);

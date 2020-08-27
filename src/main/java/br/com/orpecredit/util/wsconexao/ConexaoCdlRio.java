@@ -51,6 +51,12 @@ public class ConexaoCdlRio {
 						  "&senha=" + senha +
 						  "&cpf="+cpf +
 						  "&ip=" +ip;
+			}else if(produto.equals("[73]")) {
+				solicitacao = endereco+"/axis2/services/ServicoPessoalPlus/respostaXML"+
+						  "?codigo=" + codigo +
+						  "&senha=" + senha +
+						  "&cpf="+cpf +
+						  "&ip=" +ip;				
 			}
 			url = new URL(solicitacao);
 			con = (HttpURLConnection) url.openConnection();
@@ -224,6 +230,12 @@ public class ConexaoCdlRio {
 						  	  "&senha="+senha+
 						  	  "&cnpj="+cnpj+
 						  	  "&ip=" +ip;
+			} else if(produto.equals("[74]")) {
+				solicitacao = endereco+"/axis2/services/ServicoEmpresarialTop/respostaXML"+
+					  	  "?codigo="+codigo+
+					  	  "&senha="+senha+
+					  	  "&cnpj="+cnpj+
+					  	  "&ip=" +ip;
 			}
 			
 			url = new URL(solicitacao);

@@ -127,6 +127,25 @@ public class ConsultaController implements Serializable {
 				}
 			}
 			//System.out.println("*********** Conteudo : "+acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA242CCF().getSPCA242DEVOLUCOES().get(0).getSPCA242BANCO());
+		}else if(con.equals("[73]")) {
+				packagePage = "pessoalPlus";
+				page = "resposta";
+				widthPopupCrud = 1070;
+				heightPopupCrud = 490;
+
+				acerta = consultaService.acerta(cpf);
+				if(acerta == null) {
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Problemas de conexão com fornecedor 1", null));
+				}else {
+					if(Integer.valueOf(acerta.getRESPOSTA().getRESPOSTARETORNO().getSTATUSRESPOSTA())==0) {
+						this.openPopup();
+					}else {
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								acerta.getRESPOSTA().getRESPOSTARETORNO().getMENSAGEMRESPOSTA(), null));					
+					}
+				}
+				//System.out.println("*********** Conteudo : "+acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA242CCF().getSPCA242DEVOLUCOES().get(0).getSPCA242BANCO());			
 		}else if(con.equals("[53]")) {
 			packagePage = "buscaEndTelefoneCpf";
 			page = "resposta";			
@@ -312,7 +331,7 @@ public class ConsultaController implements Serializable {
 			//Preenche os dados da tela na entidade do produto define risco
 			preencheProdutoDefine();
 			
-			define = consultaService.defineRisco(cnpj, pd);
+			define = consultaService.defineRisco(cnpj, pd, "[52]");
 			if(define == null) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 				"Problemas de conexão com fornecedor 1", null));
@@ -359,8 +378,27 @@ public class ConsultaController implements Serializable {
 				}
 			}
 			//System.out.println("*****HABILITA : "+define.getRESPOSTA().getDEFINERESPOSTA().getDEFLOCALIZACAOCOMPLETO().getDEFMATRIZ().getDEFTELEFONEMATRIZ().getDEFTELEFONE());			
+		}else if(con.equals("[74]")) {
+			packagePage = "empresarialTop";
+			page = "resposta";			
+			widthPopupCrud = 1070;
+			heightPopupCrud = 490;
+		
+			define = consultaService.defineRisco(cnpj, null, "[74]");
+			if(define == null) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Problemas de conexão com fornecedor 1", null));
+			}else {
+				if(define.getRESPOSTA().getRESPOSTARETORNO().getSTATUSRESPOSTA()==0) {
+					this.openPopup();
+				}else {
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							define.getRESPOSTA().getRESPOSTARETORNO().getMENSAGEMRESPOSTA(), null));					
+				}
+			}
+			//System.out.println("*****HABILITA : "+define.getRESPOSTA().getDEFINERESPOSTA().getDEFPENDENCIASRESTRICOES().getDEFULTIMASOCORRENCIAS().getDEFPENDENCIARESTRICAO().get(0).getDEFDOCUMENTOORIGEM());			
+			resetTela();
 		}
-		resetTela();
 	}
 
 	public ConsultaService getConsultaService() {
@@ -854,6 +892,24 @@ public class ConsultaController implements Serializable {
 	
 	public String retiraZeros(String str) {
 		return Formatador.retiraZerosEsquerda(str.trim());
+	}
+
+	public static String zeroLeft(String origem, int tamanho) {
+		if (origem == null || origem.length() == 0) {
+			origem = "";
+		}
+		
+		StringBuffer buffer = new StringBuffer();
+
+		if (origem.length() < tamanho) {
+			for (int i = 0; i < (tamanho - origem.length()); i++) {
+				buffer.append('0');
+			}
+			buffer.append(origem);
+		} else {
+			buffer.append(origem);
+		}
+		return buffer.toString();
 	}
 	
 	public Double strDouble(String str) {
