@@ -28,7 +28,7 @@ public class ConexaoCdlRio {
 	private String endereco = "http://localhost:8080";
 	//private String endereco = "http://webservices.orpecredit.com.br";
 	
-	public br.com.orpecredit.wscdlrio.acerta.SPCAXML consultaCdlRioAcerta(String produto, String codigo, String senha, String cpf, String ip) {
+	public br.com.orpecredit.wscdlrio.acerta.SPCAXML consultaCdlRioAcerta(String produto, String codigo, String senha, String cpf, String estado, String ip) {
 		URL url;
 		HttpURLConnection con;
 		InputStream is = null;
@@ -56,6 +56,7 @@ public class ConexaoCdlRio {
 						  "?codigo=" + codigo +
 						  "&senha=" + senha +
 						  "&cpf="+cpf +
+						  "&uf=" + estado +						  
 						  "&ip=" +ip;				
 			}
 			url = new URL(solicitacao);

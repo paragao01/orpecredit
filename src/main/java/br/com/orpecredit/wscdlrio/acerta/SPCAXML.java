@@ -15909,7 +15909,8 @@ public class SPCAXML {
         "sconsulta",
         "ssolicitante",
         "scpf",
-        "stipocredito"
+        "stipocredito",
+        "stpuf"
     })
     public static class SOLICITACAO {
 
@@ -15925,6 +15926,8 @@ public class SPCAXML {
         protected String scpf;
         @XmlElement(name = "S-TIPO-CREDITO", required = true)
         protected String stipocredito;
+        @XmlElement(name = "S-TPUF", required = true)
+        protected String stpuf;
 
         /**
          * Obtém o valor da propriedade scodigo.
@@ -16069,6 +16072,30 @@ public class SPCAXML {
         public void setSTIPOCREDITO(String value) {
             this.stipocredito = value;
         }
+        
+        /**
+         * Obtém o valor da propriedade stpuf.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+		public String getSTPUF() {
+			return stpuf;
+		}
+		
+        /**
+         * Define o valor da propriedade stpuf.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+		public void setSTPUF(String value) {
+			this.stpuf = value;
+		}
 
     }
 

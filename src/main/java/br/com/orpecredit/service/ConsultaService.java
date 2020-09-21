@@ -13,7 +13,7 @@ public interface ConsultaService {
 	void consultaLogin();
 
 	@Transactional(readOnly = true)
-	br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta(String cpf);
+	br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta(String cpf, String estado);
 	
 	@Transactional(readOnly = true)
 	br.com.orpecredit.wscdlrio.acerta.SPCAXML acertaEssencial(String cpf);

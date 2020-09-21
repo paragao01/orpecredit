@@ -383,6 +383,4 @@ public class Util extends Formatador{
 		// substituicoes
 		return new String(chars);
 	}
-    
-
 }

@@ -52,7 +52,7 @@
 		<br />
 		<div id="logoOrpec">
 			<h:graphicImage style="float: left;"  library="imagens" name="logo_orpecredit.jpg" />
-			<h:graphicImage style="float: right;" library="imagens" name="orpec.png" />
+			<h:graphicImage style="float: right;" library="imagens" name="logo_cdlrio60.png" />
 		</div>
 		<div style="clear: both;"></div>		
 		<br />
@@ -243,7 +243,7 @@
 
 		<div class="divBorda">
 		<div class="titulo">
-			<p:outputLabel value="PROTESTOS" />
+			<p:outputLabel value="PROTESTOS&nbsp;" /><p:outputLabel value="#{consultaController.estadoExtenso(consultaController.acerta.getSOLICITACAO().getSTPUF())}" />		
 		</div>
 		<p:panelGrid id="pro" styleClass="ui-noborder" style="width: 100%;" 
 		             rendered="#{!empty consultaController.acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA022PROTESTOS()}">

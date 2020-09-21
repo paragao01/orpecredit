@@ -24,14 +24,14 @@ public class ConsultaServiceImpl implements ConsultaService{
 	}
 
 	@Override
-	public br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta(String cpf) {
+	public br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta(String cpf, String estado) {
 		
 		br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta = null;
 		
 		usu = (Usuario) sessao.getUsuarioSessao();
 		
 		if(usu != null) {
-			acerta = cdlrio.consultaCdlRioAcerta("[73]", usu.getLogin(), usu.getSenha(), cpf, usu.getIp());
+			acerta = cdlrio.consultaCdlRioAcerta("[73]", usu.getLogin(), usu.getSenha(), cpf, estado, usu.getIp());
 		}
 			
 		return acerta;
@@ -41,11 +41,12 @@ public class ConsultaServiceImpl implements ConsultaService{
 	public br.com.orpecredit.wscdlrio.acerta.SPCAXML acertaEssencial(String cpf) {
 		
 		br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta = null;
+		String estado = ""; //Para aproveitar o metodo para todos
 		
 		usu = (Usuario) sessao.getUsuarioSessao();
 		
 		if(usu != null) {
-			acerta = cdlrio.consultaCdlRioAcerta("[48]", usu.getLogin(), usu.getSenha(), cpf, usu.getIp());
+			acerta = cdlrio.consultaCdlRioAcerta("[48]", usu.getLogin(), usu.getSenha(), cpf, estado, usu.getIp());
 		}
 			
 		return acerta;
@@ -55,11 +56,12 @@ public class ConsultaServiceImpl implements ConsultaService{
 	public br.com.orpecredit.wscdlrio.acerta.SPCAXML acertaCadastral(String cpf) {
 		
 		br.com.orpecredit.wscdlrio.acerta.SPCAXML acerta = null;
+		String estado = ""; //Para aproveitar o metodo para todos
 		
 		usu = (Usuario) sessao.getUsuarioSessao();
 		
 		if(usu != null) {
-			acerta = cdlrio.consultaCdlRioAcerta("[53]", usu.getLogin(), usu.getSenha(), cpf, usu.getIp());
+			acerta = cdlrio.consultaCdlRioAcerta("[53]", usu.getLogin(), usu.getSenha(), cpf, estado, usu.getIp());
 		}
 			
 		return acerta;

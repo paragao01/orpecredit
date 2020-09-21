@@ -55,6 +55,7 @@ public class ConsultaController implements Serializable {
 	private String cpf;
 	private String cnpj;
 	private String estado;
+	private String nomeEstado;	
 	private String estadoTela;		
 	private String horaAtual;
 	private String dataAtual;
@@ -133,7 +134,7 @@ public class ConsultaController implements Serializable {
 				widthPopupCrud = 1070;
 				heightPopupCrud = 490;
 
-				acerta = consultaService.acerta(cpf);
+				acerta = consultaService.acerta(cpf, estado);
 				if(acerta == null) {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Problemas de conexão com fornecedor 1", null));
@@ -145,7 +146,7 @@ public class ConsultaController implements Serializable {
 								acerta.getRESPOSTA().getRESPOSTARETORNO().getMENSAGEMRESPOSTA(), null));					
 					}
 				}
-				//System.out.println("*********** Conteudo : "+acerta.getRESPOSTA().getREGISTROACSPSPCA().getSPCA242CCF().getSPCA242DEVOLUCOES().get(0).getSPCA242BANCO());			
+				//System.out.println("*********** Conteudo : "+acerta.getSOLICITACAO().getSTPUF());			
 		}else if(con.equals("[53]")) {
 			packagePage = "buscaEndTelefoneCpf";
 			page = "resposta";			
@@ -390,6 +391,7 @@ public class ConsultaController implements Serializable {
 						"Problemas de conexão com fornecedor 1", null));
 			}else {
 				if(define.getRESPOSTA().getRESPOSTARETORNO().getSTATUSRESPOSTA()==0) {
+					listaConsultaMes = preencheListaConsultaMes();
 					this.openPopup();
 				}else {
 					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -841,6 +843,14 @@ public class ConsultaController implements Serializable {
 
 	public void setValorComportamento(Double[] valorComportamento) {
 		this.valorComportamento = valorComportamento;
+	}
+
+	public String getNomeEstado() {
+		return nomeEstado;
+	}
+
+	public void setNomeEstado(String nomeEstado) {
+		this.nomeEstado = nomeEstado;
 	}
 
 	public String converteData(String data) {
@@ -1366,5 +1376,40 @@ public class ConsultaController implements Serializable {
 		public void setDez(String dez) {
 			this.dez = dez;
 		}
-	}		
+	}
+	
+	public String estadoExtenso(String uf) {
+		String nomeEstado = "";
+		     if(uf.equals("AC")) nomeEstado = "Acre";  
+		else if(uf.equals("AL")) nomeEstado = "Alagoas";  
+		else if(uf.equals("AM")) nomeEstado = "Amazonas";  
+		else if(uf.equals("AP")) nomeEstado = "Amapá";  
+		else if(uf.equals("BA")) nomeEstado = "Bahia";  
+		else if(uf.equals("CE")) nomeEstado = "Ceará";  
+		else if(uf.equals("DF")) nomeEstado = "Distrito Federal";  
+		else if(uf.equals("ES")) nomeEstado = "Espirito Santo";  
+		else if(uf.equals("GO")) nomeEstado = "Goias";  
+		else if(uf.equals("MA")) nomeEstado = "Maranhão";  
+		else if(uf.equals("MG")) nomeEstado = "Minas Gerais";  
+		else if(uf.equals("MS")) nomeEstado = "Mato Grosso Sul";  
+		else if(uf.equals("MT")) nomeEstado = "Mato Grosso";  
+		else if(uf.equals("PA")) nomeEstado = "Pará";  
+		else if(uf.equals("PB")) nomeEstado = "Paraiba";  
+		else if(uf.equals("PE")) nomeEstado = "Pernambuco";  
+		else if(uf.equals("PI")) nomeEstado = "Piaui";  
+		else if(uf.equals("PR")) nomeEstado = "Parana";  
+		else if(uf.equals("RJ")) nomeEstado = "Rio de Janeiro";  
+		else if(uf.equals("RN")) nomeEstado = "Rio Grande do Norte";  
+		else if(uf.equals("RO")) nomeEstado = "Rondônia";  
+		else if(uf.equals("RR")) nomeEstado = "Roraima";  
+		else if(uf.equals("RS")) nomeEstado = "Rio Grande do Sul";  
+		else if(uf.equals("SC")) nomeEstado = "Santa Catarina";  
+		else if(uf.equals("SE")) nomeEstado = "Sergipe";  
+		else if(uf.equals("SP")) nomeEstado = "São Paulo";  
+		else if(uf.equals("TO")) nomeEstado = "Tocantins";
+		else 					 nomeEstado = "Estado nao encontrado";
+			
+		return nomeEstado.toUpperCase();
+	}
+	
 }
