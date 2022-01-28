@@ -318,7 +318,7 @@ public class NegativacaoController implements Serializable {
 		} else if (est.equals("PB")) {
 			est = "Paraiba";
 		} else if (est.equals("PE")) {
-			est = "Pernanbuco";
+			est = "Pernambuco";
 		} else if (est.equals("PI")) {
 			est = "Piaui";
 		} else if (est.equals("PR")) {

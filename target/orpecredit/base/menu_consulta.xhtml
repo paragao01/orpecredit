@@ -13,6 +13,7 @@
 		    <div  class="cabConsulta">
 		    	&nbsp;&nbsp;&nbsp;CONSULTA PARA CPF&nbsp;&nbsp;&nbsp;
 		    </div>
+			<p:commandLink value="PESSOAL PLUS"          action="/pessoalPlus/consulta.jsf"         rendered="#{applicationSessionController.getServico('[73]')}" />		    
 			<p:commandLink value="PESSOAL GOLD"          action="/pessoalGold/consulta.jsf"         rendered="#{applicationSessionController.getServico('[48]')}" />
 			<p:commandLink value="PESSOAL PLUS NACIONAL" action="/scpcnetNacCPF/consulta.jsf"       rendered="#{applicationSessionController.getServico('[24]')}" />					    
 			<p:commandLink value="PESSOAL PLUS ESTADUAL" action="/scpcnetEstCPF/consulta.jsf"       rendered="#{applicationSessionController.getServico('[1]')}" />
@@ -24,6 +25,7 @@
 		    <div  class="cabConsulta">
 		    	&nbsp;&nbsp;&nbsp;CONSULTA PARA CNPJ&nbsp;&nbsp;&nbsp;
 		    </div>
+			<p:commandLink value="EMPRESARIAL TOP"      	 action="/empresarialTop/consulta.jsf"       rendered="#{applicationSessionController.getServico('[74]')}" />		    
 			<p:commandLink value="EMPRESARIAL GOLD"      	 action="/empresarialGold/consulta.jsf"      rendered="#{applicationSessionController.getServico('[52]')}" />
 			<p:commandLink value="EMPRESARIAL PLUS NACIONAL" action="/scpcnetNacCNPJ/consulta.jsf"       rendered="#{applicationSessionController.getServico('[47]')}" />					    
 			<p:commandLink value="EMPRESARIAL PLUS ESTADUAL" action="/scpcnetEstCNPJ/consulta.jsf"       rendered="#{applicationSessionController.getServico('[40]')}" />
