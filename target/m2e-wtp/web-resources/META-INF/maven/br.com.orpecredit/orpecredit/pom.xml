@@ -228,9 +228,13 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- FIM TESTES UNITARIOS -->
-
+		
+		<dependency>
+    		<groupId>javax.xml.bind</groupId>
+    		<artifactId>jaxb-api</artifactId>
+    		<version>2.3.1</version>
+		</dependency>
 	</dependencies>
-
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
