@@ -3,8 +3,6 @@ package br.com.orpecredit.util.exception;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerFactory;
 
-import br.com.orpecredit.util.exception.ViewExpiredExceptionExceptionHandler;
-
 public class ViewExpiredExceptionExceptionHandlerFactory extends
 		ExceptionHandlerFactory {
 
