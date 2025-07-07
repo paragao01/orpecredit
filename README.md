@@ -1,33 +1,18 @@
-# 🚀 Orpecredit – Sistema de Consultas SPC
+# Orpecredit – Sistema de Consultas SPC
 
-## 📑 Sumário
-- [Visão Geral do Sistema](#visao-geral-do-sistema)
-- [Análise da Arquitetura](#analise-da-arquitetura)
-- [Estrutura do Projeto Maven](#estrutura-do-projeto-maven)
-- [Funcionalidades do SPC](#funcionalidades-do-spc)
-- [Configurações e Integrações](#configuracoes-e-integracoes)
-- [APIs e Endpoints](#apis-e-endpoints)
-- [Banco de Dados](#banco-de-dados)
-- [Configuração e Deploy](#configuracao-e-deploy)
-- [Troubleshooting e Manutenção](#troubleshooting-e-manutencao)
-- [Diagrama de Fluxo de Consulta](#diagrama-de-fluxo-de-consulta)
-- [Contato](#contato)
+## Visão Geral do Sistema
 
----
+O **Orpecredit** é um sistema web Java 8/Maven, arquitetura MVC, para consultas ao Sistema de Proteção ao Crédito (SPC) e bureaus relacionados, apoiando decisões de crédito e gestão de risco.
 
-## 🎯 Visão Geral do Sistema
+### Principais Funcionalidades
+- Consultas de CPF/CNPJ em múltiplos produtos SPC
+- Consulta de cheques, restritivos, quadros societários e comportamentais
+- Negativação e baixa de registros
+- Integração com webservices externos (SPC, CrediOnline, CDL Rio)
+- Controle de acesso e autenticação
+- Geração de relatórios e extratos
 
-> O **Orpecredit** é um sistema web Java 8/Maven, arquitetura MVC, para consultas ao Sistema de Proteção ao Crédito (SPC) e bureaus relacionados, apoiando decisões de crédito e gestão de risco.
-
-### 🛠️ Principais Funcionalidades
-- 🔍 Consultas de CPF/CNPJ em múltiplos produtos SPC
-- 📝 Consulta de cheques, restritivos, quadros societários e comportamentais
-- ❌ Negativação e baixa de registros
-- 🌐 Integração com webservices externos (SPC, CrediOnline, CDL Rio)
-- 🔐 Controle de acesso e autenticação
-- 📊 Geração de relatórios e extratos
-
-### 🏗️ Arquitetura Geral
+### Arquitetura Geral
 
 ```mermaid
 graph TD
@@ -45,35 +30,35 @@ graph TD
     DAO --> Entity
 ```
 
-> **Tecnologias:** Java 8, Maven, Spring, Hibernate, JSF 2.2, Primefaces, SQL Server, Logback/SLF4J
+**Tecnologias:** Java 8, Maven, Spring, Hibernate, JSF 2.2, Primefaces, SQL Server, Logback/SLF4J
 
 ---
 
-## 🧩 Análise da Arquitetura
+## Análise da Arquitetura
 
-### 🗂️ Model
-- **Entidades:** `Usuario`, `Produto`, `ProdutoDefine`, `Extrato`
-- **DTOs:** JAXB para XML dos webservices (`SPCAXML`)
-- **Domínio SPC:** Classes em `br.com.orpecredit.wscdlrio.*`
+### Model
+- Entidades: `Usuario`, `Produto`, `ProdutoDefine`, `Extrato`
+- DTOs: JAXB para XML dos webservices (`SPCAXML`)
+- Domínio SPC: Classes em `br.com.orpecredit.wscdlrio.*`
 
-### 🎨 View
-- **Tecnologia:** JSF 2.2 + Primefaces
-- **Templates:** `_template.xhtml`, `_templateLogin.xhtml`
-- **Componentes:** Menus, formulários, exibição de resultados
+### View
+- JSF 2.2 + Primefaces
+- Templates: `_template.xhtml`, `_templateLogin.xhtml`
+- Componentes: Menus, formulários, exibição de resultados
 
-### 🧑‍💻 Controller
+### Controller
 - `ConsultaController`: Orquestra consultas SPC
 - `LoginController`: Autenticação
 - Outros: `NegativacaoController`, `UsuarioController`
 
-### 🏷️ Padrões de Projeto
+### Padrões de Projeto
 - MVC, DAO, Service Layer, Singleton/Session
 
 ---
 
-## 📦 Estrutura do Projeto Maven
+## Estrutura do Projeto Maven
 
-- **Empacotamento:** `WAR`
+- **Empacotamento:** WAR
 - **Dependências:** Spring, Hibernate, Primefaces, JSF, Logback, SQL Server JDBC, etc.
 - **Diretórios:**
   - `src/main/java/` – Código Java
@@ -83,29 +68,29 @@ graph TD
 
 ---
 
-## 🏷️ Funcionalidades do SPC
+## Funcionalidades do SPC
 
 - Consultas CPF: Pessoal Gold, Plus, CrediOnline, Cheque
 - Consultas CNPJ: Empresarial Gold, Top, CrediOnline
 - Negativação: Inclusão, baixa, listagem
 - Extratos: Histórico de consultas
 
-### 🔄 Fluxo de Consulta
+### Fluxo de Consulta
 1. Usuário seleciona tipo de consulta
 2. Controller chama Service
 3. Service monta requisição e chama webservice externo
 4. Resposta processada e exibida
 
-### 🌐 Integração com APIs Externas
+### Integração com APIs Externas
 - HTTP/XML/JSON via `HttpURLConnection`
 - Classes: `ConexaoCdlRio`, `ConexaoCrediOnline`
 
-### ✅ Validações
+### Validações
 - CPF/CNPJ, permissões, erros de conexão e resposta
 
 ---
 
-## ⚙️ Configurações e Integrações
+## Configurações e Integrações
 
 - **Banco:** SQL Server, Apache DBCP, Hibernate
 - **Segurança:** Spring Security, autenticação em sessão
@@ -114,23 +99,23 @@ graph TD
 
 ---
 
-## 📡 APIs e Endpoints
+## APIs e Endpoints
 
 | Produto         | Endpoint (interno) | Parâmetros de Entrada         | Resposta         |
 |-----------------|--------------------|------------------------------|------------------|
-| Pessoal Gold    | `consultaCPF`        | cpf, estado                  | SPCAXML          |
-| Empresarial Top | `consultaCNPJ`       | cnpj, estado                 | SPCAXML          |
-| CrediOnline CPF | `crediOnlineCPF`     | cpf                          | String (JSON)    |
-| Negativação     | `negativacaoIncluir` | Incluir (objeto)             | Incluir (objeto) |
+| Pessoal Gold    | consultaCPF        | cpf, estado                  | SPCAXML          |
+| Empresarial Top | consultaCNPJ       | cnpj, estado                 | SPCAXML          |
+| CrediOnline CPF | crediOnlineCPF     | cpf                          | String (JSON)    |
+| Negativação     | negativacaoIncluir | Incluir (objeto)             | Incluir (objeto) |
 
-> **Exemplo de Uso:**
+#### Exemplo de Uso
 ```java
 acerta = consultaService.acertaEssencial(cpf);
 ```
 
 ---
 
-## 🗄️ Banco de Dados
+## Banco de Dados
 
 - **Entidades:** `Usuario`, `Produto`, `ProdutoDefine`, `Extrato`
 - **Tabelas:** `Cliente`, `Produto`, `ProdutoPlano`, `ClienteProdutoPlano`
@@ -148,7 +133,7 @@ SELECT Cliente.idCliente, Cliente.NomeFantasia, Produto.idProduto, Cliente.Senha
 
 ---
 
-## 🚀 Configuração e Deploy
+## Configuração e Deploy
 
 - **Pré-requisitos:** Java 8, Maven 3.x, SQL Server, Tomcat/JBoss
 - **Build:**
@@ -160,7 +145,7 @@ mvn clean package
 
 ---
 
-## 🛠️ Troubleshooting e Manutenção
+## Troubleshooting e Manutenção
 
 - **Problemas comuns:** Erro de conexão, login inválido, respostas vazias
 - **Logs:** Saída padrão, arquivo de logs
@@ -168,7 +153,7 @@ mvn clean package
 
 ---
 
-## 🗺️ Diagrama de Fluxo de Consulta
+## Diagrama de Fluxo de Consulta
 
 ```mermaid
 sequenceDiagram
@@ -188,6 +173,5 @@ sequenceDiagram
 
 ---
 
-## 📬 Contato
-
+## Contato
 Consulte a documentação interna da empresa para responsáveis técnicos e suporte. 
