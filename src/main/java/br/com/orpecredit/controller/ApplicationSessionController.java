@@ -1,4 +1,4 @@
-package br.com.orpecredit.controller;
+package main.java.br.com.orpecredit.controller;
 
 import java.io.Serializable;
 

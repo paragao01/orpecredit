@@ -2,14 +2,14 @@ package br.com.orpecredit.service;
 
 import org.springframework.stereotype.Service;
 
-import br.com.orpecredit.controller.ApplicationSessionController;
-import br.com.orpecredit.entity.ProdutoDefine;
-import br.com.orpecredit.entity.Usuario;
-import br.com.orpecredit.util.wsconexao.ConexaoCdlRio;
-import br.com.orpecredit.util.wsconexao.ConexaoCrediOnline;
-import br.com.orpecredit.wscdlrio.negativacao.Baixar;
-import br.com.orpecredit.wscdlrio.negativacao.Incluir;
-import br.com.orpecredit.wscdlrio.negativacao.Listar;
+import main.java.br.com.orpecredit.controller.ApplicationSessionController;
+import main.java.br.com.orpecredit.entity.ProdutoDefine;
+import main.java.br.com.orpecredit.entity.Usuario;
+import main.java.br.com.orpecredit.util.wsconexao.ConexaoCdlRio;
+import main.java.br.com.orpecredit.util.wsconexao.ConexaoCrediOnline;
+import main.java.br.com.orpecredit.wscdlrio.negativacao.Baixar;
+import main.java.br.com.orpecredit.wscdlrio.negativacao.Incluir;
+import main.java.br.com.orpecredit.wscdlrio.negativacao.Listar;
 
 @Service("consultaService")
 public class ConsultaServiceImpl implements ConsultaService{
