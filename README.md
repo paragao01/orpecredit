@@ -1,15 +1,15 @@
 # 🚀 Orpecredit – Sistema de Consultas SPC
 
 ## 📑 Sumário
-- [Visão Geral do Sistema](#visão-geral-do-sistema)
-- [Análise da Arquitetura](#análise-da-arquitetura)
+- [Visão Geral do Sistema](#visao-geral-do-sistema)
+- [Análise da Arquitetura](#analise-da-arquitetura)
 - [Estrutura do Projeto Maven](#estrutura-do-projeto-maven)
 - [Funcionalidades do SPC](#funcionalidades-do-spc)
-- [Configurações e Integrações](#configurações-e-integrações)
+- [Configurações e Integrações](#configuracoes-e-integracoes)
 - [APIs e Endpoints](#apis-e-endpoints)
 - [Banco de Dados](#banco-de-dados)
-- [Configuração e Deploy](#configuração-e-deploy)
-- [Troubleshooting e Manutenção](#troubleshooting-e-manutenção)
+- [Configuração e Deploy](#configuracao-e-deploy)
+- [Troubleshooting e Manutenção](#troubleshooting-e-manutencao)
 - [Diagrama de Fluxo de Consulta](#diagrama-de-fluxo-de-consulta)
 - [Contato](#contato)
 
