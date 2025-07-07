@@ -1,11 +1,5 @@
 # 🚀 Orpecredit – Sistema de Consultas SPC
 
-<p align="center">
-  <img src="src/main/webapp/resources/imagens/logo_orpecredit.jpg" alt="Orpecredit Logo" width="200"/>
-</p>
-
----
-
 ## 📑 Sumário
 - [Visão Geral do Sistema](#visão-geral-do-sistema)
 - [Análise da Arquitetura](#análise-da-arquitetura)
