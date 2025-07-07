@@ -1,18 +1,56 @@
-# Orpecredit – Sistema de Consultas SPC
+# 🚀 Orpecredit – Sistema de Consultas SPC
 
-## Visão Geral do Sistema
+![Java](https://img.shields.io/badge/Java-8-blue?logo=java)
+![Maven](https://img.shields.io/badge/Maven-Build-orange?logo=apachemaven)
+![Spring](https://img.shields.io/badge/Spring-3.2-green?logo=spring)
+![Hibernate](https://img.shields.io/badge/Hibernate-4.x-yellow?logo=hibernate)
+![License](https://img.shields.io/badge/license-proprietary-lightgrey)
 
-O **Orpecredit** é um sistema web Java 8/Maven, arquitetura MVC, para consultas ao Sistema de Proteção ao Crédito (SPC) e bureaus relacionados, apoiando decisões de crédito e gestão de risco.
+---
 
-### Principais Funcionalidades
-- Consultas de CPF/CNPJ em múltiplos produtos SPC
-- Consulta de cheques, restritivos, quadros societários e comportamentais
-- Negativação e baixa de registros
-- Integração com webservices externos (SPC, CrediOnline, CDL Rio)
-- Controle de acesso e autenticação
-- Geração de relatórios e extratos
+<p align="center">
+  <img src="src/main/webapp/resources/imagens/logo_orpecredit.jpg" alt="Orpecredit Logo" width="220"/>
+</p>
 
-### Arquitetura Geral
+---
+
+## 📑 Sumário
+
+- [Visão Geral](#-visao-geral)
+- [Funcionalidades](#-funcionalidades)
+- [Arquitetura](#-arquitetura)
+- [Tecnologias](#-tecnologias)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Configuração](#-configuracao)
+- [Fluxo de Consulta SPC](#-fluxo-de-consulta-spc)
+- [Endpoints Internos](#-endpoints-internos-exemplos)
+- [Build & Deploy](#-build--deploy)
+- [Troubleshooting](#-troubleshooting)
+- [Manutenção](#-manutencao)
+- [Contato](#-contato)
+
+---
+
+## 🎯 Visão Geral
+
+O **Orpecredit** é um sistema web robusto para consultas ao Sistema de Proteção ao Crédito (SPC) e outros bureaus, apoiando decisões de crédito, análise de risco e negativação de clientes.
+
+> **Stack:** Java 8 • Maven • Spring • Hibernate • JSF/Primefaces • SQL Server
+
+---
+
+## ✨ Funcionalidades
+
+- 🔍 Consultas de CPF e CNPJ em múltiplos produtos SPC
+- 🧾 Consulta de cheques, restritivos, quadros societários e comportamentais
+- 🚫 Negativação e baixa de registros
+- 🔗 Integração com webservices externos (SPC, CrediOnline, CDL Rio)
+- 👤 Controle de acesso e autenticação de usuários
+- 📊 Geração de relatórios e extratos de consultas
+
+---
+
+## 🏗️ Arquitetura
 
 ```mermaid
 graph TD
@@ -30,130 +68,62 @@ graph TD
     DAO --> Entity
 ```
 
-**Tecnologias:** Java 8, Maven, Spring, Hibernate, JSF 2.2, Primefaces, SQL Server, Logback/SLF4J
+- **View:** JSF 2.2 + Primefaces
+- **Controller:** Spring MVC
+- **Service:** Lógica de negócio e integrações
+- **DAO:** Hibernate
+- **Webservices:** Integração HTTP/XML/JSON
 
 ---
 
-## Análise da Arquitetura
+## 🛠️ Tecnologias
 
-### Model
-- Entidades: `Usuario`, `Produto`, `ProdutoDefine`, `Extrato`
-- DTOs: JAXB para XML dos webservices (`SPCAXML`)
-- Domínio SPC: Classes em `br.com.orpecredit.wscdlrio.*`
-
-### View
-- JSF 2.2 + Primefaces
-- Templates: `_template.xhtml`, `_templateLogin.xhtml`
-- Componentes: Menus, formulários, exibição de resultados
-
-### Controller
-- `ConsultaController`: Orquestra consultas SPC
-- `LoginController`: Autenticação
-- Outros: `NegativacaoController`, `UsuarioController`
-
-### Padrões de Projeto
-- MVC, DAO, Service Layer, Singleton/Session
+| Categoria         | Tecnologias                                    |
+|-------------------|------------------------------------------------|
+| Backend           | Java 8, Spring 3.2, Hibernate 4                |
+| Frontend          | JSF 2.2, Primefaces 5.3                        |
+| Build/Deploy      | Maven, WAR, Tomcat/JBoss                       |
+| Banco de Dados    | SQL Server, Apache DBCP                        |
+| Integrações       | Webservices SOAP/REST (SPC, CrediOnline, CDL)  |
+| Logging           | Logback, SLF4J                                 |
 
 ---
 
-## Estrutura do Projeto Maven
+## 📁 Estrutura do Projeto
 
-- **Empacotamento:** WAR
-- **Dependências:** Spring, Hibernate, Primefaces, JSF, Logback, SQL Server JDBC, etc.
-- **Diretórios:**
-  - `src/main/java/` – Código Java
-  - `src/main/resources/` – Configurações
-  - `src/main/webapp/` – Views JSF, estáticos, WEB-INF
-- **Configuração:** `config.properties`, alternância de endpoints
-
----
-
-## Funcionalidades do SPC
-
-- Consultas CPF: Pessoal Gold, Plus, CrediOnline, Cheque
-- Consultas CNPJ: Empresarial Gold, Top, CrediOnline
-- Negativação: Inclusão, baixa, listagem
-- Extratos: Histórico de consultas
-
-### Fluxo de Consulta
-1. Usuário seleciona tipo de consulta
-2. Controller chama Service
-3. Service monta requisição e chama webservice externo
-4. Resposta processada e exibida
-
-### Integração com APIs Externas
-- HTTP/XML/JSON via `HttpURLConnection`
-- Classes: `ConexaoCdlRio`, `ConexaoCrediOnline`
-
-### Validações
-- CPF/CNPJ, permissões, erros de conexão e resposta
-
----
-
-## Configurações e Integrações
-
-- **Banco:** SQL Server, Apache DBCP, Hibernate
-- **Segurança:** Spring Security, autenticação em sessão
-- **Webservices:** URLs configuráveis, consumo HTTP
-- **Logs:** Logback/SLF4J, saída padrão
-
----
-
-## APIs e Endpoints
-
-| Produto         | Endpoint (interno) | Parâmetros de Entrada         | Resposta         |
-|-----------------|--------------------|------------------------------|------------------|
-| Pessoal Gold    | consultaCPF        | cpf, estado                  | SPCAXML          |
-| Empresarial Top | consultaCNPJ       | cnpj, estado                 | SPCAXML          |
-| CrediOnline CPF | crediOnlineCPF     | cpf                          | String (JSON)    |
-| Negativação     | negativacaoIncluir | Incluir (objeto)             | Incluir (objeto) |
-
-#### Exemplo de Uso
-```java
-acerta = consultaService.acertaEssencial(cpf);
+```
+src/
+  main/
+    java/           # Código-fonte Java
+    resources/      # Configurações e properties
+    webapp/         # Views JSF, recursos estáticos, WEB-INF
 ```
 
 ---
 
-## Banco de Dados
+## ⚙️ Configuracao
 
-- **Entidades:** `Usuario`, `Produto`, `ProdutoDefine`, `Extrato`
-- **Tabelas:** `Cliente`, `Produto`, `ProdutoPlano`, `ClienteProdutoPlano`
-- **Query Crítica:**
-```sql
-SELECT Cliente.idCliente, Cliente.NomeFantasia, Produto.idProduto, Cliente.Senha, 
-       Produto.codigoProdutoFornecedor, Produto.fornecedor
-  FROM Produto
- INNER JOIN ProdutoPlano ON Produto.idProduto = ProdutoPlano.idProduto
- INNER JOIN ClienteProdutoPlano ON ProdutoPlano.idProdutoPlano = ClienteProdutoPlano.idProdutoPlano
- INNER JOIN Cliente ON ClienteProdutoPlano.idCliente = Cliente.idCliente
- WHERE Cliente.CodigoCliente=:Cliente.CodigoCliente
-   AND Cliente.Senha=:Cliente.Senha
-```
+### Banco de Dados
+- SQL Server
+- Configuração: `src/main/resources/module/db-context.xml`
+- Pool: Apache DBCP
+- Propriedades: `config.properties` (`jdbc.url`, `jdbc.username`, `jdbc.password`)
 
----
+### Segurança
+- Spring Security
+- Autenticação via `LoginController`
 
-## Configuração e Deploy
+### Integrações Externas
+- SPC, CDL Rio, CrediOnline
+- URLs configuráveis em `config.properties`
 
-- **Pré-requisitos:** Java 8, Maven 3.x, SQL Server, Tomcat/JBoss
-- **Build:**
-```bash
-mvn clean package
-```
-- **Deploy:** Configurar `config.properties`, deploy do `.war` no servidor
-- **Variáveis:** `jdbc.url`, `jdbc.username`, `jdbc.password`, URLs dos webservices
+### Logs
+- Logback/SLF4J
+- Configuração: `log4j.properties`
 
 ---
 
-## Troubleshooting e Manutenção
-
-- **Problemas comuns:** Erro de conexão, login inválido, respostas vazias
-- **Logs:** Saída padrão, arquivo de logs
-- **Manutenção:** Atualização de dependências, endpoints, scripts SQL
-
----
-
-## Diagrama de Fluxo de Consulta
+## 🔄 Fluxo de Consulta SPC
 
 ```mermaid
 sequenceDiagram
@@ -173,5 +143,60 @@ sequenceDiagram
 
 ---
 
-## Contato
-Consulte a documentação interna da empresa para responsáveis técnicos e suporte. 
+## 📡 Endpoints Internos (Exemplos)
+
+| Produto         | Método Controller      | Parâmetros de Entrada | Resposta         |
+|-----------------|-----------------------|----------------------|------------------|
+| Pessoal Gold    | `consultaCPF`         | cpf, estado          | SPCAXML          |
+| Empresarial Top | `consultaCNPJ`        | cnpj, estado         | SPCAXML          |
+| CrediOnline CPF | `crediOnlineCPF`      | cpf                  | String (JSON)    |
+| Negativação     | `negativacaoIncluir`  | Incluir (objeto)     | Incluir (objeto) |
+
+---
+
+## 🏗️ Build & Deploy
+
+### Pré-requisitos
+- Java 8
+- Maven 3.x
+- SQL Server
+- Servidor de aplicação (Tomcat, JBoss, etc.)
+
+### Build
+
+```bash
+mvn clean package
+```
+
+- Gera o arquivo `.war` para deploy
+
+### Deploy
+- Configure `config.properties` com dados de banco e endpoints
+- Faça o deploy do `.war` no servidor de aplicação
+
+---
+
+## 🩺 Troubleshooting
+
+- ❌ **Erro de conexão com webservice:** Verifique URLs e conectividade
+- 🔑 **Login inválido:** Cheque credenciais e status do usuário
+- 🕳️ **Respostas vazias:** Valide parâmetros e permissões do usuário
+- 📝 **Logs:** Consulte saída padrão do servidor e arquivos em `log4j.properties`
+
+---
+
+## 🛡️ Manutencao
+
+- Atualize dependências Maven periodicamente
+- Ajuste endpoints em `config.properties` conforme necessário
+- Mantenha scripts SQL para atualização de tabelas
+
+---
+
+## 📬 Contato
+
+Consulte a documentação interna da empresa para responsáveis técnicos e suporte.
+
+<p align="center">
+  <sub>© Orpecredit – Sistema de Consultas SPC</sub>
+</p> 
