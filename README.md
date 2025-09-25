@@ -80,7 +80,7 @@ graph TD
 
 | Categoria         | Tecnologias                                    |
 |-------------------|------------------------------------------------|
-| Backend           | Java 8                                         |
+| Backend           | Java 8, Spring 3.2, Hibernate 4                |
 | Frontend          | JSF 2.2, Primefaces 5.3                        |
 | Build/Deploy      | Maven, WAR, Tomcat/JBoss                       |
 | Banco de Dados    | SQL Server, Apache DBCP                        |
